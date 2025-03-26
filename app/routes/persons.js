@@ -12,9 +12,14 @@ router.get('/:id', function (req, res, next) {
     data: { id: req.params.id },
     metadata: {}
   };
-  sendToQueue(msg, function (response) {
-    res.send(response);
-  });
+  try {
+    sendToQueue(msg, function (response) {
+      res.send(response);
+    });
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 });
 
 router.post('/', function (req, res, next) {

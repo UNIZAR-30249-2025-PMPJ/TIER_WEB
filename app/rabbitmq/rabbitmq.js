@@ -24,41 +24,43 @@ amqp.connect(rabbitmqUrl, function (error0, con) {
 
 
 sendToQueue = function (msg, callback) {
-    channel.assertQueue('', {
-        exclusive: true
-    }, function (error2, q) {
-        if (error2) {
-            throw error2;
-        }
-        var correlationId = generateUuid();
+    try {
 
-        console.log(' [x] Requesting ', msg);
-
-        channel.consume(q.queue, function (msg) {
-            if (msg.properties.correlationId == correlationId) {
-                console.log(' [.] Got %s', msg.content.toString());
-                setTimeout(function () {
-                    connection.close();
-                    process.exit(0)
-                }, 500);
-                callback(JSON.parse(msg.content));
+        channel.assertQueue('', {
+            exclusive: true
+        }, function (error2, q) {
+            if (error2) {
+                throw error2;
             }
-        }, {
-            noAck: true
-        });
+            var correlationId = generateUuid();
 
-        channel.sendToQueue('webapp',
-            Buffer.from(JSON.stringify(msg)), {
-            correlationId: correlationId,
-            replyTo: q.queue
+            console.log(' [x] Requesting ', msg);
+
+            channel.consume(q.queue, function (msg) {
+                if (msg.properties.correlationId == correlationId) {
+                    console.log(' [.] Got %s', msg.content.toString());
+                    callback(JSON.parse(msg.content));
+                }
+            }, {
+                noAck: true
+            });
+
+            channel.sendToQueue('webapp',
+                Buffer.from(JSON.stringify(msg)), {
+                correlationId: correlationId,
+                replyTo: q.queue
+            });
         });
-    });
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
 }
 
 function generateUuid() {
     return Math.random().toString() +
-           Math.random().toString() +
-           Math.random().toString();
-  }
+        Math.random().toString() +
+        Math.random().toString();
+}
 
 module.exports = sendToQueue;
