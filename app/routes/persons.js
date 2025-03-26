@@ -1,38 +1,12 @@
 var express = require('express');
 var router = express.Router();
 var sendToQueue = require("../rabbitmq/rabbitmq");
-const ENTITY = "Person";
+var personsController = require("../controllers/personsController");
 
 /* GET users listing. */
-router.get('/:id', function (req, res, next) {
-  console.log(req.params.id);
-  let msg = {
-    entity: ENTITY,
-    action: "GET",
-    data: { id: req.params.id },
-    metadata: {}
-  };
-  try {
-    sendToQueue(msg, function (response) {
-      res.send(response);
-    });
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-});
+router.get('/:id', personsController.processRequest);
 
-router.post('/', function (req, res, next) {
-  let msg = {
-    entity: ENTITY,
-    action: "POST",
-    data: req.body,
-    metadata: {}
-  }
-  sendToQueue(msg, function (response) {
-    res.send(response);
-  });
-}
-);
+router.post('/', personsController.processRequest);
+
 
 module.exports = router;
