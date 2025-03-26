@@ -55,12 +55,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/persons/838383",
+							"raw": "{{url}}/people/838383",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"persons",
+								"people",
 								"838383"
 							]
 						}
@@ -102,12 +102,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/persons",
+							"raw": "{{url}}/people",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"persons"
+								"people"
 							]
 						}
 					},
