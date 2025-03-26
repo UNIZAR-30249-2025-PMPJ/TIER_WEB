@@ -7,7 +7,7 @@ function processRequest(req, res, entity, operation){
         entity: entity,
         operation: operation,
         action: req.method,
-        data: req.body,
+        body: req.body,
         header: req.headers,
         params: req.params
       };
