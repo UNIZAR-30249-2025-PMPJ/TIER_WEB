@@ -54,6 +54,37 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"1\",\n    \"email\": \"one@gmail.com\",\n    \"name\": \"Prueba\",\n    \"role\": \"Alumno\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/persons",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"persons"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
