@@ -9,8 +9,11 @@ var indexRouter = require('./app/routes/index');
 var personRouter = require('./app/routes/persons');
 var authRouter = require('./app/routes/auth');
 
+const cors = require("cors");
+
 
 var app = express();
+app.use(cors()); 
 
 // view engine setup
 app.set('views', path.join(__dirname, 'app', 'views'));
