@@ -11,17 +11,57 @@
 			"item": [
 				{
 					"name": "get user by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response matches the expected object\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    var expectedObject = {",
+									"    \"id\": \"838383\",",
+									"    \"name\": \"Prueba\",",
+									"    \"email\": \"838383@unizar.es\",",
+									"    \"department\": \"undefined\",",
+									"    \"role\": {",
+									"        \"name\": \"Alumno\"",
+									"    }",
+									"}",
+									"    pm.expect(jsonData).to.eql(expectedObject);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{url}}/persons/1",
+							"raw": "{{url}}/persons/838383",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"persons",
-								"1"
+								"838383"
 							]
 						}
 					},
@@ -29,12 +69,32 @@
 				},
 				{
 					"name": "create user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response matches the expected object\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    var expectedObject = {\"id\":\"838384\",\"name\":\"Prueba\",\"email\":\"838384@unizar.es\",\"department\":\"undefined\",\"role\":{\"name\":\"Alumno\"}}",
+									"    pm.expect(jsonData).to.eql(expectedObject);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": \"1\",\n    \"email\": \"one@gmail.com\",\n    \"name\": \"Prueba\",\n    \"role\": \"Alumno\"\n}",
+							"raw": "{\n    \"id\": \"838384\",\n    \"email\": \"838384@unizar.es\",\n    \"name\": \"Prueba\",\n    \"role\": \"Alumno\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -60,12 +120,32 @@
 			"item": [
 				{
 					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"token exists\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property(\"token\");",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": \"1\",\n    \"email\": \"one@gmail.com\",\n    \"name\": \"Prueba\",\n    \"role\": \"Alumno\"\n}",
+							"raw": "{\n    \"email\": \"838383@unizar.es\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -73,12 +153,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/persons",
+							"raw": "{{url}}/login",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"persons"
+								"login"
 							]
 						}
 					},
