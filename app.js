@@ -12,8 +12,32 @@ var authRouter = require('./app/routes/auth');
 const cors = require("cors");
 
 
+// Swagger to document the API
+const swaggerJsDoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
+
+//Set up swagger documentation
+const swaggerOptions = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "LABIS API",
+      description: "LABIS API Information",
+      servers: ["http://localhost:3000"],
+      version: "1.0.0",
+
+    }
+  },
+  apis: ["./app/routes/*.js"]
+};
+
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+
+
+
 var app = express();
 app.use(cors()); 
+app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'app', 'views'));
