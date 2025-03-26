@@ -45,7 +45,7 @@ sendToQueue = function (msg, callback) {
                 noAck: true
             });
 
-            channel.sendToQueue('webapp',
+            channel.sendToQueue(QUEUE,
                 Buffer.from(JSON.stringify(msg)), {
                 correlationId: correlationId,
                 replyTo: q.queue
