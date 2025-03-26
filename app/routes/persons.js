@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
-var sendToQueue = require("../rabbitmq/rabbitmq");
-var personsController = require("../controllers/personsController");
+var personsController = require("../controllers/requestController");
+const ENTITY = "Person";
 
 /* GET users listing. */
-router.get('/:id', personsController.processRequest);
+router.get('/:id', (req, res) => personsController.processRequest(req, res, ENTITY));
 
-router.post('/', personsController.processRequest);
+router.post('/', (req, res) => personsController.processRequest(req, res, ENTITY));
 
 
 module.exports = router;

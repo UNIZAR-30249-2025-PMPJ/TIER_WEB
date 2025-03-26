@@ -1,11 +1,10 @@
 
 
-const ENTITY = "Person";
 const sendToQueue = require("../rabbitmq/rabbitmq");
 
-function processRequest(req, res){
+function processRequest(req, res, entity){
     let msg = { 
-        entity: ENTITY,
+        entity: entity,
         action: req.method,
         data: req.body,
         header: req.headers,
