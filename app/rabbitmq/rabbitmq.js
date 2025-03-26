@@ -23,15 +23,6 @@ amqp.connect(rabbitmqUrl, function (error0, con) {
 });
 
 
-// sendToQueue = function (msg) {
-//     channel.assertQueue(QUEUE, {
-//         durable: false
-//     });
-
-//     channel.sendToQueue(QUEUE, Buffer.from(JSON.stringify(msg)));
-//     console.log(" [x] Sent %s", msg);
-// }
-
 sendToQueue = function (msg, callback) {
     channel.assertQueue('', {
         exclusive: true
