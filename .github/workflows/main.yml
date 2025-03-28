@@ -1,0 +1,64 @@
+name: Deploy and Test All Repos
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout TIER_WEB
+        uses: actions/checkout@v4
+        with:
+          path: TIER_WEB
+
+      - name: Checkout TIER_APP
+        uses: actions/checkout@v4
+        with:
+          repository: UNIZAR-30249-2025-PMPJ/TIER_APP
+          path: TIER_APP
+
+      - name: Checkout TIER_DB
+        uses: actions/checkout@v4
+        with:
+          repository: UNIZAR-30249-2025-PMPJ/TIER_DB
+          path: TIER_DB
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies and build TIER_WEB
+        run: |
+          npm install
+          npm run build
+          npm start &
+
+      - name: Install dependencies and build TIER_APP
+        run: |
+          cd repo2
+          npm install
+          npm run build
+          npm start &
+          cd ..
+
+      - name: Install dependencies and build TIER_DB
+        run: |
+          cd repo3
+          npm install
+          npm run build
+          npm start &
+          cd ..
+
+      - name: Wait for services to start
+        run: sleep 10s
+
+      - name: Install newman (Postman CLI)
+        run: npm install -g newman
+
+      - name: Run Postman tests
+        run: newman run Lab.postman_collection.json --reporters cli
