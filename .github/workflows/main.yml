@@ -66,4 +66,7 @@ jobs:
         run: npm install -g newman
 
       - name: Run Postman tests
-        run: newman run Lab.postman_collection.json --reporters cli
+        run: |
+          cd TIER_APP
+          newman run Lab.postman_collection.json --reporters cli
+          cd ..
