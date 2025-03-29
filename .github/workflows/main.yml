@@ -42,7 +42,15 @@ jobs:
           npm install
           npm start &
           cd ..
+      - name: Install dependencies and build TIER_DB
+        run: |
+          cd TIER_DB
+          docker compose up -d
+          cd ..
 
+      - name: Wait for services to start
+        run: sleep 10s
+        
       - name: Install dependencies and build TIER_APP
         run: |
           cd TIER_APP
@@ -52,15 +60,6 @@ jobs:
           npx prisma migrate reset
           npm start &
           cd ..
-
-      - name: Install dependencies and build TIER_DB
-        run: |
-          cd TIER_DB
-          docker compose up -d
-          cd ..
-
-      - name: Wait for services to start
-        run: sleep 10s
 
       - name: Install newman (Postman CLI)
         run: npm install -g newman
