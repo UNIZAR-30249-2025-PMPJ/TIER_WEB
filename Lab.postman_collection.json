@@ -22,7 +22,7 @@
 									"",
 									"pm.test(\"Response matches the expected object\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    var expectedObject = {\"id\":\"838384\",\"name\":\"Prueba\",\"email\":\"838384@unizar.es\",\"department\":\"undefined\",\"role\":{\"name\":\"Alumno\"}}",
+									"    var expectedObject = {\"id\":\"838383\",\"name\":\"Prueba\",\"email\":\"838383@unizar.es\",\"department\":\"undefined\",\"role\":{\"name\":\"Alumno\"}}",
 									"    pm.expect(jsonData).to.eql(expectedObject);",
 									"});"
 								],
@@ -36,7 +36,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": \"838384\",\n    \"email\": \"838384@unizar.es\",\n    \"name\": \"Prueba\",\n    \"role\": \"Alumno\"\n}",
+							"raw": "{\n    \"id\": \"838383\",\n    \"email\": \"838383@unizar.es\",\n    \"name\": \"Prueba\",\n    \"role\": \"Alumno\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
