@@ -39,7 +39,6 @@ jobs:
         run: |
           cd TIER_WEB
           npm install
-          npm run build
           npm start &
           cd ..
 
