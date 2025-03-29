@@ -15,6 +15,7 @@ jobs:
         with:
           repository: UNIZAR-30249-2025-PMPJ/TIER_WEB
           token: ${{ secrets.PAT_ACTIONS }}
+          ref: ${{ github.head_ref }}
           path: TIER_WEB
         
       - name: Checkout TIER_APP
@@ -46,6 +47,7 @@ jobs:
       - name: Install dependencies and build TIER_DB
         run: |
           cd TIER_DB
+          docker compose down
           docker compose up -d
           cd ..
 
@@ -69,5 +71,11 @@ jobs:
       - name: Run Postman tests
         run: |
           cd TIER_WEB
-          newman run Lab.postman_collection.json --reporters cli
+          newman run Lab.postman_collection.json
+          cd ..
+
+      - name: Tear down TIER_DB (Remove containers and data)
+        run: |
+          cd TIER_DB
+          docker compose down
           cd ..
