@@ -59,6 +59,7 @@ jobs:
           cd TIER_APP
           echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
           echo "RABBITMQ_URL=${{ secrets.RABBITMQ_URL }}" >> .env
+          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
           npm install
           npx prisma db push
           npx prisma db seed
