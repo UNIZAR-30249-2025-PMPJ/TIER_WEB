@@ -70,7 +70,7 @@ jobs:
       - name: Run Postman tests
         run: |
           cd TIER_WEB
-          newman run Lab.postman_collection.json --reporters cli
+          newman run Lab.postman_collection.json
           cd ..
 
       - name: Tear down TIER_DB (Remove containers and data)
