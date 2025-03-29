@@ -71,3 +71,9 @@ jobs:
           cd TIER_WEB
           newman run Lab.postman_collection.json --reporters cli
           cd ..
+
+      - name: Tear down TIER_DB (Remove containers and data)
+        run: |
+          cd TIER_DB
+          docker compose down
+          cd ..
