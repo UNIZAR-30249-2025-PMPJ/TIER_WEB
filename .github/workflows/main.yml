@@ -57,7 +57,8 @@ jobs:
           echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
           echo "RABBITMQ_URL=${{ secrets.RABBITMQ_URL }}" >> .env
           npm install
-          npx prisma migrate reset
+          npx prisma db push
+          npx prisma db seed
           npm start &
           cd ..
 
