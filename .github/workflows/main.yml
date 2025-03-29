@@ -38,6 +38,7 @@ jobs:
       - name: Install dependencies and build TIER_WEB
         run: |
           cd TIER_WEB
+          echo "RABBITMQ_URL=${{ secrets.RABBITMQ_URL }}" >> .env
           npm install
           npm start &
           cd ..
@@ -45,7 +46,10 @@ jobs:
       - name: Install dependencies and build TIER_APP
         run: |
           cd TIER_APP
+          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
+          echo "RABBITMQ_URL=${{ secrets.RABBITMQ_URL }}" >> .env
           npm install
+          npx prisma migrate reset
           npm start &
           cd ..
 
