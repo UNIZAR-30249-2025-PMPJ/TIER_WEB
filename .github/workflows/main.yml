@@ -46,6 +46,7 @@ jobs:
       - name: Install dependencies and build TIER_DB
         run: |
           cd TIER_DB
+          docker-compose down
           docker compose up -d
           cd ..
 
