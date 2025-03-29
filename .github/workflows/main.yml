@@ -67,6 +67,6 @@ jobs:
 
       - name: Run Postman tests
         run: |
-          cd TIER_APP
+          cd TIER_WEB
           newman run Lab.postman_collection.json --reporters cli
           cd ..
