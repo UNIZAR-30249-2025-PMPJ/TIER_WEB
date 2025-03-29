@@ -1,7 +1,9 @@
 name: Deploy and Test All Repos
 
 on:
-  push:
+  pull_request:
+      branches:
+      - main
 
 jobs:
   deploy:
@@ -11,10 +13,9 @@ jobs:
       - name: Checkout TIER_WEB
         uses: actions/checkout@v4
         with:
+          repository: UNIZAR-30249-2025-PMPJ/TIER_WEB
+          token: ${{ secrets.PAT_ACTIONS }}
           path: TIER_WEB
-          
-      - name: Configurar rama predeterminada
-        run: git config --global init.defaultBranch main
         
       - name: Checkout TIER_APP
         uses: actions/checkout@v4
