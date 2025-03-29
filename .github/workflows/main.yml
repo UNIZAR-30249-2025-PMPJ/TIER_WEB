@@ -15,6 +15,7 @@ jobs:
         with:
           repository: UNIZAR-30249-2025-PMPJ/TIER_WEB
           token: ${{ secrets.PAT_ACTIONS }}
+          ref: ${{ github.head_ref }}
           path: TIER_WEB
         
       - name: Checkout TIER_APP
