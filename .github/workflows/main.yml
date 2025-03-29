@@ -2,8 +2,6 @@ name: Deploy and Test All Repos
 
 on:
   push:
-    branches:
-      - main
 
 jobs:
   deploy:
