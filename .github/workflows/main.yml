@@ -16,13 +16,15 @@ jobs:
       - name: Checkout TIER_APP
         uses: actions/checkout@v4
         with:
-          repository: UNIZAR-30249-2025-PMPJ/TIER_APP@main
+          repository: UNIZAR-30249-2025-PMPJ/TIER_APP
+          ref: 'main'
           path: TIER_APP
 
       - name: Checkout TIER_DB
         uses: actions/checkout@v4
         with:
-          repository: UNIZAR-30249-2025-PMPJ/TIER_DB@main
+          repository: UNIZAR-30249-2025-PMPJ/TIER_DB
+          ref: 'main'
           path: TIER_DB
 
       - name: Set up Node.js
