@@ -22,6 +22,7 @@
 									"",
 									"pm.test(\"Response matches the expected object\", function () {",
 									"    var jsonData = pm.response.json();",
+									"    console.log(jsonData);",
 									"    var expectedObject = {\"id\":\"838383\",\"name\":\"Prueba\",\"email\":\"838383@unizar.es\",\"department\":\"undefined\",\"role\":{\"name\":\"Alumno\"}}",
 									"    pm.expect(jsonData).to.eql(expectedObject);",
 									"});"
@@ -78,6 +79,7 @@
 									"        \"name\": \"Alumno\"",
 									"    }",
 									"}",
+									"    console.log(jsonData);",
 									"    pm.expect(jsonData).to.eql(expectedObject);",
 									"});"
 								],
@@ -132,6 +134,7 @@
 									"",
 									"pm.test(\"token exists\", function () {",
 									"    var jsonData = pm.response.json();",
+									"    console.log(jsonData);",
 									"    pm.expect(jsonData).to.have.property(\"token\");",
 									"});",
 									""
