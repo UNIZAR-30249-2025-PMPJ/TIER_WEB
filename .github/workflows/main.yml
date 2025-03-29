@@ -17,14 +17,14 @@ jobs:
         run: git config --global init.defaultBranch main
         
       - name: Checkout TIER_APP
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           repository: UNIZAR-30249-2025-PMPJ/TIER_APP
           token: ${{ secrets.PAT_ACTIONS }}
           path: TIER_APP
 
       - name: Checkout TIER_DB
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           repository: UNIZAR-30249-2025-PMPJ/TIER_DB
           token: ${{ secrets.PAT_ACTIONS }}
@@ -37,24 +37,23 @@ jobs:
 
       - name: Install dependencies and build TIER_WEB
         run: |
-          npm install
-          npm run build
-          npm start &
-
-      - name: Install dependencies and build TIER_APP
-        run: |
-          cd repo2
+          cd TIER_WEB
           npm install
           npm run build
           npm start &
           cd ..
 
+      - name: Install dependencies and build TIER_APP
+        run: |
+          cd TIER_APP
+          npm install
+          npm start &
+          cd ..
+
       - name: Install dependencies and build TIER_DB
         run: |
-          cd repo3
-          npm install
-          npm run build
-          npm start &
+          cd TIER_DB
+          docker compose up -d
           cd ..
 
       - name: Wait for services to start
