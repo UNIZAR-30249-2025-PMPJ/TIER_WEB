@@ -95,4 +95,28 @@ router.get('/:id', (req, res) => peopleController.processRequest(req, res, ENTIT
 router.post('/', (req, res) => peopleController.processRequest(req, res, ENTITY, "CREATE"));
 
 
+
+/**
+ * @swagger
+ * /people/{id}:
+ *   delete:
+ *     tags:
+ *      - People
+ *     summary: Delete a person by ID
+ *     description: Use this endpoint to delete a person by their unique ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID of the person to delete
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Person deleted successfully
+ *       404:
+ *         description: Person not found
+ */
+router.delete('/:id', (req, res) => peopleController.processRequest(req, res, ENTITY, "DELETE"));
+
 module.exports = router;
