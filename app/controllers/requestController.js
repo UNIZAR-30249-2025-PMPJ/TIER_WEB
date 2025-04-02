@@ -22,5 +22,5 @@ function processRequest(req, res, entity, operation){
 }
 
 module.exports = {
-    processRequest
+    processRequest 
 }

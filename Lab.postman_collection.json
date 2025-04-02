@@ -129,6 +129,7 @@
 									"pm.test(\"Response matches the expected message\", function () {",
 									"   ",
 									"    pm.response.to.have.body('\"Person with id 838383 deleted successfully\"');",
+
 									"});"
 								],
 								"type": "text/javascript",
