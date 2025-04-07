@@ -13,7 +13,8 @@ function processRequest(req, res, entity, operation){
       };
       try {
         sendToQueue(msg, function (response) {
-          res.send(response);
+          response = JSON.parse(response);
+          res.status(response.status).send(response.data);
         });
       } catch (error) {
         console.error(error);
