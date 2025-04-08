@@ -3,25 +3,49 @@ var router = express.Router();
 var requestController = require("../controllers/requestController");
 const ENTITY = "Space";  
 
-
 /**
  * @swagger
- * /spaces:
+ * /spaces/{id}/{maxOccupants}/{reservabilityCategory}:
  *   get:
  *     tags:
  *       - Spaces
- *     summary: Get all spaces (Not implemented)
- *     description: This endpoint is not implemented yet, but it will allow retrieving all spaces.
+ *     summary: Retrieve a specific space by ID, maxOccupants, and reservability category
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID of the space
+ *       - name: maxOccupants
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: Maximum number of occupants
+ *       - name: reservabilityCategory
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Category of reservability
  *     responses:
- *       501:
- *         description: Not Implemented
+ *       200:
+ *         description: Space information
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *                 maxOccupants:
+ *                   type: integer
+ *                 reservabilityCategory:
+ *                   type: string
  */
-router.get('/', (req, res) => {
-  res.status(501).send({
-    error: "Not Implemented",
-    message: "GET /spaces endpoint is not implemented yet."
-  });
-});
+router.get('/:id/:maxOccupants/:reservabilityCategory', (req, res) => requestController.processRequest(req, res, ENTITY, "SEARCH"));
+
 
 /**
  * @swagger
@@ -47,9 +71,9 @@ router.get('/', (req, res) => {
  *         description: Not Implemented
  */
 router.post('/', (req, res) => {
-  res.status(501).send({
-    error: "Not Implemented",
-    message: "POST /spaces endpoint is not implemented yet."
+  res.status(405).send({
+    error: "Method Not Allowed",
+    message: "PUT method is not allowed for /people/{id}."
   });
 });
 
@@ -110,9 +134,9 @@ router.put('/:id', (req, res) => {
  *         description: Not Implemented
  */
 router.delete('/:id', (req, res) => {
-  res.status(501).send({
-    error: "Not Implemented",
-    message: "DELETE /spaces/{id} endpoint is not implemented yet."
+  res.status(405).send({
+    error: "Method Not Allowed",
+    message: "PUT method is not allowed for /people/{id}."
   });
 });
 
