@@ -6,22 +6,39 @@ const ENTITY = "Space";
 
 /**
  * @swagger
- * /people/{id}:
+ * /spaces:
  *   get:
  *     tags:
- *      - People
- *     summary: Retrieve a person by ID
- *     description: Use this endpoint to retrieve a person by their unique ID.
+ *      - Space
+ *     summary: Retrieve spaces
+ *     description: Use this endpoint to retrieve spaces.
  *     parameters:
- *       - in: path
+ *       - in: query
  *         name: id
- *         required: true
- *         description: ID of the person to retrieve
+ *         required: false
+ *         description: ID of the space to retrieve
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: maxOccupants
+ *         required: false
+ *         description: Maximum occupants of the space to retrieve
+ *         schema:
+ *           type: integer
+ *       - in: query
+ *         name: reservabilityCategory
+ *         required: false
+ *         description: Reservability category of the space to retrieve
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: floor
+ *         required: false
+ *         description: Floor of the space to retrieve
  *         schema:
  *           type: string
  *     responses:
  *       200:
- *         description: A person object
  *         content:
  *           application/json:
  *             schema:
@@ -31,18 +48,25 @@ const ENTITY = "Space";
  *                   type: string
  *                 name:
  *                   type: string
- *                 email:
+ *                 location:
  *                   type: string
- *                 department:
+ *                 capacity:
+ *                   type: integer
+ *                 features:
+ *                   type: array
+ *                   items:
+ *                     type: string
+ *                 maxOccupants:
+ *                   type: integer
+ *                 reservabilityCategory:
  *                   type: string
- *                 role:
- *                   type: object
- *                   properties:
- *                     name:
- *                       type: string
+ *                 floor:
+ *                   type: integer
  *       404:
- *         description: Person not found
+ *         description: Space not found
  */
 router.get('/', (req, res) => spaceController.processRequest(req, res, ENTITY, "GET"));
+
+router.put("/:id", (req, res) => spaceController.processRequest(req, res, ENTITY, "PUT"));
 
 module.exports = router;
