@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var peopleController = require("../controllers/requestController");
+var requestController = require("../controllers/requestController");
 const ENTITY = "Person";
 
 
@@ -43,7 +43,7 @@ const ENTITY = "Person";
  *       404:
  *         description: Person not found
  */
-router.get('/:id', (req, res) => peopleController.processRequest(req, res, ENTITY, "GETBYID"));
+router.get('/:id', (req, res) => requestController.processRequest(req, res, ENTITY, "GETBYID"));
 
 /**
  * @swagger
@@ -92,9 +92,34 @@ router.get('/:id', (req, res) => peopleController.processRequest(req, res, ENTIT
  *       404:
  *         description: Person not created
  */
-router.post('/', (req, res) => peopleController.processRequest(req, res, ENTITY, "CREATE"));
+router.post('/', (req, res) => requestController.processRequest(req, res, ENTITY, "CREATE"));
 
 
+/**
+ * @swagger
+ * /people/{id}:
+ *   put:
+ *     tags:
+ *      - People
+ *     summary: Update a person by ID (Not implemented)
+ *     description: This endpoint is not implemented and will not be available.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID of the person to update
+ *         schema:
+ *           type: string
+ *     responses:
+ *       404:
+ *         description: Endpoint not found
+ */
+router.put('/:id', (req, res) => {
+    res.status(405).send({
+        error: "Method Not Allowed",
+        message: "PUT method is not allowed for /people/{id}."
+    });
+});
 
 /**
  * @swagger
@@ -117,6 +142,6 @@ router.post('/', (req, res) => peopleController.processRequest(req, res, ENTITY,
  *       404:
  *         description: Person not found
  */
-router.delete('/:id', (req, res) => peopleController.processRequest(req, res, ENTITY, "DELETE"));
+router.delete('/:id', (req, res) => requestController.processRequest(req, res, ENTITY, "DELETE"));
 
 module.exports = router;
