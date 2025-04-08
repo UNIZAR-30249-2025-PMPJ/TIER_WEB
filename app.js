@@ -8,6 +8,7 @@ var logger = require('morgan');
 var indexRouter = require('./app/routes/index');
 var personRouter = require('./app/routes/people');
 var authRouter = require('./app/routes/auth');
+var spaceRouter = require('./app/routes/space');
 
 const cors = require("cors");
 
@@ -52,6 +53,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/people', personRouter);
 app.use('/login',authRouter);
+app.use('/spaces', spaceRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -69,18 +71,5 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-// Global error handler for uncaught exceptions
-process.on('uncaughtException', (err) => {
-  console.error('Uncaught Exception:', err);
-  // Optionally, you can exit the process if needed
-  // process.exit(1);
-});
-
-// Global error handler for unhandled promise rejections
-process.on('unhandledRejection', (reason, promise) => {
-  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
-  // Optionally, you can exit the process if needed
-  // process.exit(1);
-});
 
 module.exports = app;
