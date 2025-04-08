@@ -1,32 +1,75 @@
 asyncapi: '2.6.0'
 info:
-  title: Sistema de Pedidos
+  title: ByronHub
   version: '1.0.0'
-  description: API de mensajería entre el tier A y tier B vía RabbitMQ
-
-servers:
-  production:
-    url: rabbitmq.myserver.com
-    protocol: amqp
+  description: Message API facilitating communication between the Web Tier and the Application Tier.
 
 channels:
-  pedido.creado:
-    description: Evento emitido cuando se crea un nuevo pedido
-    subscribe:
-      summary: Tier B escucha nuevos pedidos
+  person.created:
+    description: Event published when a new person is created.
+    publish:
+      summary: HTTP POST /people triggers this event
+      operationId: personCreated
       message:
-        $ref: '#/components/messages/PedidoCreado'
+        $ref: '#/components/messages/PersonCreated'
+
+  person.deleted:
+    description: Event published when a person is deleted.
+    publish:
+      summary: HTTP DELETE /people/{id} triggers this event
+      operationId: personDeleted
+      message:
+        $ref: '#/components/messages/PersonDeleted'
+
+  person.retrieved:
+    description: Event published when a person is retrieved by ID.
+    publish:
+      summary: HTTP GET /people/{id} triggers this event
+      operationId: personRetrieved
+      message:
+        $ref: '#/components/messages/PersonRetrieved'
 
 components:
   messages:
-    PedidoCreado:
-      name: PedidoCreado
+    PersonCreated:
+      name: PersonCreated
+      title: Person Created Event
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/PersonPayload'
+
+    PersonDeleted:
+      name: PersonDeleted
+      title: Person Deleted Event
       contentType: application/json
       payload:
         type: object
         properties:
-          idPedido:
+          id:
             type: string
-          fecha:
-            type: string
-            format: date-time
+            description: ID of the deleted person
+
+    PersonRetrieved:
+      name: PersonRetrieved
+      title: Person Retrieved Event
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/PersonPayload'
+
+  schemas:
+    PersonPayload:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        department:
+          type: string
+        role:
+          type: object
+          properties:
+            name:
+              type: string
