@@ -3,29 +3,30 @@ var router = express.Router();
 var requestController = require("../controllers/requestController");
 const ENTITY = "Space";  
 
+
 /**
  * @swagger
- * /spaces/{id}/{maxOccupants}/{reservabilityCategory}:
+ * /spaces:
  *   get:
  *     tags:
  *       - Spaces
  *     summary: Retrieve a specific space by ID, maxOccupants, and reservability category
  *     parameters:
  *       - name: id
- *         in: path
- *         required: true
+ *         in: query
+ *         required: false
  *         schema:
  *           type: string
  *         description: ID of the space
  *       - name: maxOccupants
- *         in: path
- *         required: true
+ *         in: query
+ *         required: false
  *         schema:
  *           type: integer
  *         description: Maximum number of occupants
  *       - name: reservabilityCategory
- *         in: path
- *         required: true
+ *         in: query
+ *         required: false
  *         schema:
  *           type: string
  *         description: Category of reservability
@@ -44,7 +45,9 @@ const ENTITY = "Space";
  *                 reservabilityCategory:
  *                   type: string
  */
-router.get('/:id/:maxOccupants/:reservabilityCategory', (req, res) => requestController.processRequest(req, res, ENTITY, "SEARCH"));
+router.get('/', (req, res) => 
+  requestController.processRequest(req, res, ENTITY, "SEARCH")
+);
 
 
 /**
