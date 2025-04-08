@@ -73,7 +73,7 @@ router.get('/:id/:maxOccupants/:reservabilityCategory', (req, res) => requestCon
 router.post('/', (req, res) => {
   res.status(405).send({
     error: "Method Not Allowed",
-    message: "PUT method is not allowed for /people/{id}."
+    message: "POST method is not allowed for /spaces."
   });
 });
 
@@ -110,7 +110,7 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
   res.status(501).send({
     error: "Not Implemented",
-    message: "PUT /spaces/{id} endpoint is not implemented yet."
+    message: "PUT /spaces endpoint is not implemented yet."
   });
 });
 
@@ -136,7 +136,7 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
   res.status(405).send({
     error: "Method Not Allowed",
-    message: "PUT method is not allowed for /people/{id}."
+    message: "PUT method is not allowed for /spaces."
   });
 });
 
