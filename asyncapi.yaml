@@ -1,0 +1,32 @@
+asyncapi: '2.6.0'
+info:
+  title: Sistema de Pedidos
+  version: '1.0.0'
+  description: API de mensajería entre el tier A y tier B vía RabbitMQ
+
+servers:
+  production:
+    url: rabbitmq.myserver.com
+    protocol: amqp
+
+channels:
+  pedido.creado:
+    description: Evento emitido cuando se crea un nuevo pedido
+    subscribe:
+      summary: Tier B escucha nuevos pedidos
+      message:
+        $ref: '#/components/messages/PedidoCreado'
+
+components:
+  messages:
+    PedidoCreado:
+      name: PedidoCreado
+      contentType: application/json
+      payload:
+        type: object
+        properties:
+          idPedido:
+            type: string
+          fecha:
+            type: string
+            format: date-time
