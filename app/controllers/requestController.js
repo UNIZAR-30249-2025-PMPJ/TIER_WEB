@@ -9,7 +9,8 @@ function processRequest(req, res, entity, operation){
         action: req.method,
         body: req.body,
         header: req.headers,
-        params: req.params
+        params: req.params,
+        query: req.query,
       };
       try {
         sendToQueue(msg, function (response) {
