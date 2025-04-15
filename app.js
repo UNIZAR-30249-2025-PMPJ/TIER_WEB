@@ -39,6 +39,9 @@ const swaggerDocs = swaggerJsDoc(swaggerOptions);
 var app = express();
 app.use(cors()); 
 app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+const docsRoute = require('./app/routes/docs');
+app.use("/api/async", docsRoute);
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'app', 'views'));
