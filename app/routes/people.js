@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var peopleController = require("../controllers/requestController");
+const { authenticateJWT } = require('../middleware/auth');
 const ENTITY = "Person";
 
 
@@ -43,7 +44,7 @@ const ENTITY = "Person";
  *       404:
  *         description: Person not found
  */
-router.get('/:id', (req, res) => peopleController.processRequest(req, res, ENTITY, "GETBYID"));
+router.get('/:id',authenticateJWT, (req, res) => peopleController.processRequest(req, res, ENTITY, "GETBYID"));
 
 /**
  * @swagger
@@ -92,7 +93,7 @@ router.get('/:id', (req, res) => peopleController.processRequest(req, res, ENTIT
  *       404:
  *         description: Person not created
  */
-router.post('/', (req, res) => peopleController.processRequest(req, res, ENTITY, "CREATE"));
+router.post('/',authenticateJWT, (req, res) => peopleController.processRequest(req, res, ENTITY, "CREATE"));
 
 
 
@@ -117,6 +118,6 @@ router.post('/', (req, res) => peopleController.processRequest(req, res, ENTITY,
  *       404:
  *         description: Person not found
  */
-router.delete('/:id', (req, res) => peopleController.processRequest(req, res, ENTITY, "DELETE"));
+router.delete('/:id',authenticateJWT, (req, res) => peopleController.processRequest(req, res, ENTITY, "DELETE"));
 
 module.exports = router;
