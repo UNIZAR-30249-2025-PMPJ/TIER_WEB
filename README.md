@@ -13,7 +13,7 @@
 - [x] `PUT`: editar si es reservable, capacidad, horario, categoría, a qué o quién está asignado 
 ### Reservations
 
-- 
+- [ ]
 ### Notifications 
-- 
+- [ ]
 
