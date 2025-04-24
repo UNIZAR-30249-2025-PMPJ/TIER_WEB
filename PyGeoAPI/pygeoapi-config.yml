@@ -229,3 +229,31 @@ resources:
               - type: feature
                 name: GeoJSON
                 data: /pygeoapi/data7.geojson
+    postgres:
+      type: collection
+      title: "Postgres"
+      description: "Conexion con postgres"
+      keywords:
+        - espacios
+        - puntos
+      extents:
+        spatial:
+          bbox: [[-0.8877, 41.6488, -0.8877, 41.6488]]
+          crs: 'http://www.opengis.net/def/crs/EPSG/0/4326'
+        temporal:
+          interval: [[null, null]]
+          trs: 2020-01-01T00:00:00Z
+      providers:
+              - type: feature
+                name: PostgreSQL
+                data:
+                    host: 10.1.170.111
+                    port: 5432 # Default 5432 if not provided
+                    dbname: byronhub
+                    user: root
+                    password: root
+                    search_path: [byronhub]
+                id_field: id
+                table: Space
+                geom_field: byronhub.geometry
+                srid: 4326
