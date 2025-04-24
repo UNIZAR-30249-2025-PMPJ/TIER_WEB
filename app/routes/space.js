@@ -122,8 +122,6 @@ router.get('/', (req, res) => spaceController.processRequest(req, res, ENTITY, "
  *               properties:
  *                 name:
  *                   type: string
- *             type:
- *               type: string
  *             assignedTo:
  *               type: string
  *     responses:
