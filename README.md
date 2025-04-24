@@ -15,6 +15,7 @@
 
 - [ ] `GET`: obtener reservas dado id, persona, espacio y fecha
 - [ ] `POST`: crear una reserva
+- [ ] `PUT`: editar el estado de una reserva (creating, active, rejected, potentially invalid, done)
 - [ ] `DELETE`: eliminar una reserva
 ### Notifications 
 - [ ] 
