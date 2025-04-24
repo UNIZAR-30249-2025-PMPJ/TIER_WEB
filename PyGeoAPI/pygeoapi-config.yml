@@ -252,8 +252,8 @@ resources:
                     dbname: byronhub
                     user: root
                     password: root
-                    search_path: [byronhub]
+                    search_path: [public]
                 id_field: id
                 table: Space
-                geom_field: byronhub.geometry
+                geom_field: geometry
                 srid: 4326
