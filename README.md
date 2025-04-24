@@ -2,10 +2,10 @@
 - [x] `POST`: login
 ### People
 
-- [x] `GET` : obtener los datos de un usuario dado un id
-- [x] `POST`: crear un usuario
-- [ ] `PUT`: editar el rol de un usuario
-- [ ] `PUT`: editar el departamento de un usuario
+- [x] `GET` : obtener los datos de una persona dado un id
+- [x] `POST`: crear una persona
+- [ ] `PUT`: editar el rol de una persona
+- [ ] `PUT`: editar el departamento de una persona
 - [x] `DELETE`: eliminar un usuario
 ### Spaces
 
@@ -13,7 +13,9 @@
 - [x] `PUT`: editar si es reservable, capacidad, horario, categoría, a qué o quién está asignado 
 ### Reservations
 
-- [ ]
+- [ ] `GET`: obtener reservas dado id, persona, espacio y fecha
+- [ ] `POST`: crear una reserva
+- [ ] `DELETE`: eliminar una reserva
 ### Notifications 
-- [ ]
+- [ ] 
 
