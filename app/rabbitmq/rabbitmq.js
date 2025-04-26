@@ -38,7 +38,7 @@ sendToQueue = function (msg, callback) {
 
             channel.consume(q.queue, function (msg) {
                 if (msg.properties.correlationId == correlationId) {
-                    // console.log(' [.] Got %s', msg.content.toString());
+                    console.log(' [.] Got %s', msg.content.toString());
                     callback(JSON.parse(msg.content));
                 }
             }, {
