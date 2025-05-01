@@ -13,10 +13,10 @@
 - [x] `PUT`: editar si es reservable, capacidad, horario, categoría, a qué o quién está asignado 
 ### Reservations
 
-- [ ] `GET`: obtener reservas dado id, persona, espacio y fecha
-- [ ] `POST`: crear una reserva
-- [ ] `PUT`: editar el estado de una reserva (creating, active, rejected, potentially invalid, done)
-- [ ] `DELETE`: eliminar una reserva
+- [x] `GET`: obtener reservas dado id, persona, espacio y fecha
+- [x] `POST`: crear una reserva
+- [x] `PUT`: editar el estado de una reserva (creating, active, rejected, potentially invalid, done)
+- [x] `DELETE`: eliminar una reserva
 ### Notifications 
-- [ ] 
+- [ ] `GET`: obtener notificaciones dado persona
 
