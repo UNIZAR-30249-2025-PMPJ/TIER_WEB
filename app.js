@@ -9,6 +9,7 @@ var indexRouter = require('./app/routes/index');
 var personRouter = require('./app/routes/people');
 var authRouter = require('./app/routes/auth');
 var spaceRouter = require('./app/routes/space');
+var reservationsRouter = require('./app/routes/reservations');
 var notificationRouter = require('./app/routes/notifications');
 
 const cors = require("cors");
@@ -58,6 +59,7 @@ app.use('/', indexRouter);
 app.use('/people', personRouter);
 app.use('/login',authRouter);
 app.use('/spaces', spaceRouter);
+app.use("/reservations", reservationsRouter); 
 app.use('/notifications', notificationRouter);
 
 // catch 404 and forward to error handler
