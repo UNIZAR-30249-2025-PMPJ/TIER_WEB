@@ -10,6 +10,7 @@ var personRouter = require('./app/routes/people');
 var authRouter = require('./app/routes/auth');
 var spaceRouter = require('./app/routes/space');
 var reservationsRouter = require('./app/routes/reservations');
+var notificationRouter = require('./app/routes/notifications');
 
 const cors = require("cors");
 
@@ -40,6 +41,9 @@ const swaggerDocs = swaggerJsDoc(swaggerOptions);
 var app = express();
 app.use(cors()); 
 app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+const docsRoute = require('./app/routes/docs');
+app.use("/api/async", docsRoute);
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'app', 'views'));
@@ -56,6 +60,7 @@ app.use('/people', personRouter);
 app.use('/login',authRouter);
 app.use('/spaces', spaceRouter);
 app.use("/reservations", reservationsRouter); 
+app.use('/notifications', notificationRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

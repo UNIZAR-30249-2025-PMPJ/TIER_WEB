@@ -99,6 +99,76 @@ router.post('/',authenticateJWT, (req, res) => peopleController.processRequest(r
 
 /**
  * @swagger
+ * /people/role/{id}:
+ *   put:
+ *     tags:
+ *      - People
+ *     summary: Update a person's role by ID
+ *     description: Use this endpoint to update a person's role by their unique ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID of the person whose role is to be updated
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               role:
+ *                 type: string
+ *                 description: The new role for the person
+ *     responses:
+ *       200:
+ *         description: Person's role updated successfully
+ *       404:
+ *         description: Person not found
+ */
+router.put('/role/:id',authenticateJWT, (req, res) => peopleController.processRequest(req, res, ENTITY, "ROLE"));
+
+/**
+ * @swagger
+ * /people/department/{id}:
+ *   put:
+ *     tags:
+ *      - People
+ *     summary: Update a person's department by ID
+ *     description: Use this endpoint to update a person's department by their unique ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID of the person whose department is to be updated
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               department:
+ *                 type: string
+ *                 description: The new department for the person
+ *     responses:
+ *       200:
+ *         description: Person's department updated successfully
+ *       404:
+ *         description: Person not found
+ */
+router.put('/department/:id',authenticateJWT, (req, res) => peopleController.processRequest(req, res, ENTITY, "DEPARTMENT"));
+
+
+
+
+
+/**
+ * @swagger
  * /people/{id}:
  *   delete:
  *     tags:
@@ -119,5 +189,8 @@ router.post('/',authenticateJWT, (req, res) => peopleController.processRequest(r
  *         description: Person not found
  */
 router.delete('/:id',authenticateJWT, (req, res) => peopleController.processRequest(req, res, ENTITY, "DELETE"));
+
+
+
 
 module.exports = router;

@@ -80,6 +80,10 @@ const ENTITY = "Space";
  *                     type: string
  *                   assignedTo:
  *                     type: string
+ *       400:
+ *         description: Invalid input
+ *       404:
+ *         description: Space not found
  */
 router.get('/', (req, res) => spaceController.processRequest(req, res, ENTITY, "GET"));
 
@@ -122,8 +126,6 @@ router.get('/', (req, res) => spaceController.processRequest(req, res, ENTITY, "
  *               properties:
  *                 name:
  *                   type: string
- *             type:
- *               type: string
  *             assignedTo:
  *               type: string
  *     responses:
