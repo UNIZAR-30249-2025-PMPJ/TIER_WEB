@@ -4,8 +4,8 @@
 
 - [x] `GET` : obtener los datos de una persona dado un id
 - [x] `POST`: crear una persona
-- [ ] `PUT`: editar el rol de una persona
-- [ ] `PUT`: editar el departamento de una persona
+- [x] `PUT`: editar el rol de una persona
+- [x] `PUT`: editar el departamento de una persona
 - [x] `DELETE`: eliminar un usuario
 ### Spaces
 
@@ -18,5 +18,5 @@
 - [x] `PUT`: editar el estado de una reserva (creating, active, rejected, potentially invalid, done)
 - [x] `DELETE`: eliminar una reserva
 ### Notifications 
-- [ ] `GET`: obtener notificaciones dado persona
+- [x] `GET`: obtener notificaciones dado persona
 
