@@ -3,7 +3,7 @@ var amqp = require('amqplib/callback_api');
 var connection = null;
 var channel = null;
 
-const QUEUE = "webapp4"
+const QUEUE = process.env.RABBITMQ_QUEUE || "default_queue";
 
 const rabbitmqUrl = process.env.RABBITMQ_URL;
 if (!rabbitmqUrl) {
