@@ -12,6 +12,7 @@ function processRequest(req, res, entity, operation){
         params: req.params,
         query: req.query,
       };
+      console.log("Sending message to queue:", msg);
       try {
         sendToQueue(msg, function (response) {
           response = JSON.parse(response);

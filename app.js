@@ -11,7 +11,7 @@ var authRouter = require('./app/routes/auth');
 var spaceRouter = require('./app/routes/space');
 var reservationsRouter = require('./app/routes/reservations');
 var notificationRouter = require('./app/routes/notifications');
-
+var buildingRouter = require('./app/routes/buildings');
 const cors = require("cors");
 
 
@@ -61,10 +61,11 @@ app.use('/login',authRouter);
 app.use('/spaces', spaceRouter);
 app.use("/reservations", reservationsRouter); 
 app.use('/notifications', notificationRouter);
+app.use("/buildings", buildingRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  next(createError(405));
+  next(createError(410));
 });
 
 // error handler
