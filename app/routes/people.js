@@ -7,7 +7,7 @@ const ENTITY = "Person";
 
 /**
  * @swagger
- * /people/{id}:
+ * /api/people/{id}:
  *   get:
  *     tags:
  *      - People
@@ -48,7 +48,7 @@ router.get('/:id',authenticateJWT, (req, res) => peopleController.processRequest
 
 /**
  * @swagger
- * /people:
+ * /api/people:
  *   post:
  *     tags:
  *      - People
@@ -99,7 +99,7 @@ router.post('/',authenticateJWT, (req, res) => peopleController.processRequest(r
 
 /**
  * @swagger
- * /people/role/{id}:
+ * /api/people/role/{id}:
  *   put:
  *     tags:
  *      - People
@@ -169,7 +169,7 @@ router.put('/department/:id',authenticateJWT, (req, res) => peopleController.pro
 
 /**
  * @swagger
- * /people/{id}:
+ * /api/people/{id}:
  *   delete:
  *     tags:
  *      - People

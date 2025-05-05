@@ -5,7 +5,7 @@ const ENTITY = "Building";
 
 /**
  * @swagger
- * /buildings:
+ * /api/buildings:
  *   get:
  *     tags:
  *      - Building
@@ -51,7 +51,7 @@ router.get('/', (req, res) => buildingController.processRequest(req, res, ENTITY
 
 /**
  * @swagger
- * /buildings/{id}:
+ * /api/buildings/{id}:
  *   put:
  *     tags:
  *       - Building

@@ -6,7 +6,7 @@ const ENTITY = "Space";
 
 /**
  * @swagger
- * /spaces:
+ * /api/spaces:
  *   get:
  *     tags:
  *      - Space
@@ -91,7 +91,7 @@ router.get('/', (req, res) => spaceController.processRequest(req, res, ENTITY, "
 
 /**
  * @swagger
- * /spaces/{id}:
+ * /api/spaces/{id}:
  *   put:
  *     tags:
  *       - Space

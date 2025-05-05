@@ -5,7 +5,7 @@ const ENTITY = "Reservation";
 
 /**
  * @swagger
- * /reservations:
+ * /api/reservations:
  *   get:
  *     tags:
  *      - Reservation
@@ -81,7 +81,7 @@ router.get('/', (req, res) => reservationController.processRequest(req, res, ENT
 
 /**
  * @swagger
- * /reservations:
+ * /api/reservations:
  *   post:
  *     tags:
  *      - Reservation
@@ -146,7 +146,7 @@ router.post('/', (req, res) => reservationController.processRequest(req, res, EN
 
 /**
  * @swagger
- * /reservations/{id}:
+ * /api/reservations/{id}:
  *   put:
  *     tags:
  *      - Reservation
@@ -204,7 +204,7 @@ router.put("/:id", (req, res) => reservationController.processRequest(req, res, 
 
 /**
  * @swagger
- * /reservations/{id}:
+ * /api/reservations/{id}:
  *   delete:
  *     tags:
  *      - Reservation
