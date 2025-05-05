@@ -5,13 +5,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./app/routes/index');
-var personRouter = require('./app/routes/people');
-var authRouter = require('./app/routes/auth');
-var spaceRouter = require('./app/routes/space');
-var reservationsRouter = require('./app/routes/reservations');
-var notificationRouter = require('./app/routes/notifications');
-var buildingRouter = require('./app/routes/buildings');
+const apiRouter = require('./app/routes/api');
+
 const cors = require("cors");
 
 
@@ -26,7 +21,7 @@ const swaggerOptions = {
     info: {
       title: "LABIS API",
       description: "LABIS API Information",
-      servers: ["http://localhost:3000"],
+      servers: ["http://localhost:3000/api"],
       version: "1.0.0",
 
     }
@@ -35,14 +30,13 @@ const swaggerOptions = {
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
+const docsRoute = require('./app/routes/docs');
 
 
 
 var app = express();
 app.use(cors()); 
-app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-const docsRoute = require('./app/routes/docs');
-app.use("/api/async", docsRoute);
+
 
 
 // view engine setup
@@ -55,13 +49,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/people', personRouter);
-app.use('/login',authRouter);
-app.use('/spaces', spaceRouter);
-app.use("/reservations", reservationsRouter); 
-app.use('/notifications', notificationRouter);
-app.use("/buildings", buildingRouter);
+app.use('/api', apiRouter);
+app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+app.use("/api/async", docsRoute);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
