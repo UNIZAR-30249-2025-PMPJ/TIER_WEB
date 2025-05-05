@@ -5,7 +5,7 @@ const ENTITY = "Auth";
 
 /**
  * @swagger
- * /:
+ * /login:
  *   post:
  *     summary: Login to the application
  *     description: Authenticates a user and returns a JWT token.
