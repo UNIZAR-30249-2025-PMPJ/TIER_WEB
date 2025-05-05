@@ -205,7 +205,7 @@ router.put("/:id", (req, res) => reservationController.processRequest(req, res, 
 /**
  * @swagger
  * /reservations/{id}:
- *   put:
+ *   delete:
  *     tags:
  *      - Reservation
  *     summary: Delete a reservation

@@ -5,7 +5,7 @@ const ENTITY = "Building";
 
 /**
  * @swagger
- * /reservations:
+ * /buildings:
  *   get:
  *     tags:
  *      - Building
@@ -39,10 +39,10 @@ const ENTITY = "Building";
  *                   maxUsage:
  *                     type: integer
  *                   holidays:
- *                   type: array
- *                   items:
- *                    type: string
- *                    format: date-time
+ *                     type: array
+ *                     items:
+ *                       type: string
+ *                       format: date-time
  *       404:
  *         description: Reservation not found
  */
@@ -51,7 +51,7 @@ router.get('/', (req, res) => buildingController.processRequest(req, res, ENTITY
 
 /**
  * @swagger
- * /reservations/{id}:
+ * /buildings/{id}:
  *   put:
  *     tags:
  *       - Building
