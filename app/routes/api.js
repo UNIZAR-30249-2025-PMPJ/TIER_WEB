@@ -8,7 +8,7 @@ const spaceRouter = require('./space');
 const reservationsRouter = require('./reservations');
 const notificationRouter = require('./notifications');
 const buildingRouter = require('./buildings');
-const docsRoute = require('./docs');
+
 
 router.use('/', indexRouter);
 router.use('/people', personRouter);
@@ -17,7 +17,7 @@ router.use('/spaces', spaceRouter);
 router.use('/reservations', reservationsRouter);
 router.use('/notifications', notificationRouter);
 router.use('/buildings', buildingRouter);
-router.use('/docs', docsRoute);
-router.use('/async', docsRoute);
+
+
 
 module.exports = router;
