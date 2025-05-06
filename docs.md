@@ -175,6 +175,8 @@ This structure allows the Application Tier to interpret and route each message a
     - `startTime` (optional): The start time from which to retrieve reservations. If provided, `duration` must also be provided.
       - Format: `date-time`.
     - `duration` (optional): The duration in minutes from the `startTime` to check for reservations. If provided, `startTime` must also be provided.
+    - `state` (optional): An array of states to filter reservations by (e.g., `ACTIVE`, `DONE`, `POTENTIALLY INVALID`).  
+      - Example: `["ACTIVE", "DONE"]`
   - Response:  
     - `200`: A list of reservations matching the query parameters.  
       - Content-Type: `application/json`  

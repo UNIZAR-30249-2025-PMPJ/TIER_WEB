@@ -43,6 +43,15 @@ const ENTITY = "Reservation";
  *         description: Duration in minutes from the startTime to check for reservations. If provided, startTime must also be provided.
  *         schema:
  *           type: integer
+ *      - in: query
+ *        name: state
+ *        required: false
+ *        description: State of the reservation to retrieve
+ *        schema:
+ *          type: array
+ *          items:
+ *            type: string
+ * 
  *     responses:
  *       200:
  *         description: A list of reservations
