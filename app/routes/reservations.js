@@ -114,8 +114,6 @@ router.get('/',authenticateJWT, (req, res) => reservationController.processReque
  *                 type: integer
  *               description:
  *                 type: string
- *               personId:
- *                 type: string
  *               spaceId:
  *                 type: string
  *     responses:
