@@ -148,7 +148,7 @@ router.get('/',authenticateJWT, (req, res) => reservationController.processReque
  *       404:
  *         description: Space or person not found
  */
-router.post('/',authenticateJWT, (req, res) => reservationController.processRequest(req, res, ENTITY, "POST"));
+router.post('/', (req, res) => reservationController.processRequest(req, res, ENTITY, "POST"));
 
 
 /**
