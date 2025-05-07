@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var reservationController = require("../controllers/requestController");
 const ENTITY = "Reservation";
-
+const { authenticateJWT } = require('../middleware/auth');
 /**
  * @swagger
  * /api/reservations:

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var spaceController = require("../controllers/requestController");
 const ENTITY = "Space";
+const { authenticateJWT } = require('../middleware/auth');
 
 
 /**

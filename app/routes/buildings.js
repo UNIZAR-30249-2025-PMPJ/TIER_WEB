@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var buildingController = require("../controllers/requestController");
 const ENTITY = "Building";
+const { authenticateJWT } = require('../middleware/auth');
 
 /**
  * @swagger
