@@ -86,7 +86,7 @@ const ENTITY = "Reservation";
  *       404:
  *         description: Reservation not found
  */
-router.get('/', (req, res) => reservationController.processRequest(req, res, ENTITY, "GET"));
+router.get('/',authenticateJWT, (req, res) => reservationController.processRequest(req, res, ENTITY, "GET"));
 
 /**
  * @swagger
@@ -150,7 +150,7 @@ router.get('/', (req, res) => reservationController.processRequest(req, res, ENT
  *       404:
  *         description: Space or person not found
  */
-router.post('/', (req, res) => reservationController.processRequest(req, res, ENTITY, "POST"));
+router.post('/',authenticateJWT, (req, res) => reservationController.processRequest(req, res, ENTITY, "POST"));
 
 
 /**
@@ -209,7 +209,7 @@ router.post('/', (req, res) => reservationController.processRequest(req, res, EN
  *       404:
  *         description: Reservation not found
  */
-router.put("/:id", (req, res) => reservationController.processRequest(req, res, ENTITY, "PUT"));
+router.put("/:id",authenticateJWT, (req, res) => reservationController.processRequest(req, res, ENTITY, "PUT"));
 
 /**
  * @swagger
@@ -258,6 +258,6 @@ router.put("/:id", (req, res) => reservationController.processRequest(req, res, 
  *       404:
  *         description: Reservation not found
  */
-router.delete("/:id", (req, res) => reservationController.processRequest(req, res, ENTITY, "DELETE"));
+router.delete("/:id",authenticateJWT, (req, res) => reservationController.processRequest(req, res, ENTITY, "DELETE"));
 
 module.exports = router;

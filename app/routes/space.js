@@ -85,7 +85,7 @@ const ENTITY = "Space";
  *       404:
  *         description: Space not found
  */
-router.get('/', (req, res) => spaceController.processRequest(req, res, ENTITY, "GET"));
+router.get('/',authenticateJWT, (req, res) => spaceController.processRequest(req, res, ENTITY, "GET"));
 
 
 
@@ -179,6 +179,6 @@ router.get('/', (req, res) => spaceController.processRequest(req, res, ENTITY, "
  *       404:
  *         description: Space not found
  */
-router.put("/:id", (req, res) => spaceController.processRequest(req, res, ENTITY, "PUT"));
+router.put("/:id",authenticateJWT, (req, res) => spaceController.processRequest(req, res, ENTITY, "PUT"));
 
 module.exports = router;
