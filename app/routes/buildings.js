@@ -46,7 +46,7 @@ const ENTITY = "Building";
  *       404:
  *         description: Reservation not found
  */
-router.get('/', (req, res) => buildingController.processRequest(req, res, ENTITY, "GET"));
+router.get('/',authenticateJWT, (req, res) => buildingController.processRequest(req, res, ENTITY, "GET"));
 
 
 /**
