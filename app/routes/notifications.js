@@ -7,7 +7,7 @@ const ENTITY = "Notification";
 
 /**
  * @swagger
- * /api/people/{id}:
+ * /api/notifications/{id}:
  *   get:
  *     tags:
  *      - Notifications
