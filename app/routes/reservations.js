@@ -19,11 +19,13 @@ const { authenticateJWT } = require('../middleware/auth');
  *         schema:
  *           type: string
  *       - in: query
- *         name: spaceId
+ *         name: spaceIds
  *         required: false
  *         description: ID of the space to retrieve reservations for
  *         schema:
- *           type: string
+ *           type: array
+ *           items:
+ *             type: string
  *       - in: query
  *         name: personId
  *         required: false
@@ -79,8 +81,10 @@ const { authenticateJWT } = require('../middleware/auth');
  *                     type: string
  *                   personId:
  *                     type: string
- *                   spaceId:
- *                     type: string
+ *                   spaceIds:
+ *                     type: array
+ *                     items:
+ *                       type: string
  *       400:
  *         description: Invalid input
  *       404:
@@ -114,8 +118,10 @@ router.get('/',authenticateJWT, (req, res) => reservationController.processReque
  *                 type: integer
  *               description:
  *                 type: string
- *               spaceId:
- *                 type: string
+ *               spaceIds:
+ *                 type: array
+ *                 items:
+ *                   type: string
  *     responses:
  *       200:
  *         description: Reservation created
@@ -143,8 +149,10 @@ router.get('/',authenticateJWT, (req, res) => reservationController.processReque
  *                     type: string
  *                   personId:
  *                     type: string
- *                   spaceId:
- *                     type: string
+ *                   spaceIds:
+ *                     type: array
+ *                     items:
+ *                       type: string
  *       404:
  *         description: Space or person not found
  */
@@ -202,8 +210,10 @@ router.post('/',authenticateJWT, (req, res) => reservationController.processRequ
  *                     type: string
  *                   personId:
  *                     type: string
- *                   spaceId:
- *                     type: string
+ *                   spaceIds:
+ *                     type: Array
+ *                     items:
+ *                       type: string
  *       404:
  *         description: Reservation not found
  */
@@ -251,8 +261,10 @@ router.put("/:id",authenticateJWT, (req, res) => reservationController.processRe
  *                     type: string
  *                   personId:
  *                     type: string
- *                   spaceId:
- *                     type: string
+ *                   spaceIds:
+ *                     type: Array
+ *                     items:
+ *                       type: string
  *       404:
  *         description: Reservation not found
  */

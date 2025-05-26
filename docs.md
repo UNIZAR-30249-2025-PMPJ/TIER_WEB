@@ -170,7 +170,7 @@ This structure allows the Application Tier to interpret and route each message a
   Retrieve a list of reservations or a specific reservation by its unique ID.  
   - Query:
     - `id` (optional): The unique ID of the reservation to retrieve.
-    - `spaceId` (optional): The unique ID of the space to retrieve reservations for.
+    - `spaceIds` (optional): IDs array of spaces to retrieve reservations for.
     - `personId` (optional): The unique ID of the person to retrieve reservations for.
     - `startTime` (optional): The start time from which to retrieve reservations. If provided, `duration` must also be provided.
       - Format: `date-time`.
@@ -192,7 +192,7 @@ This structure allows the Application Tier to interpret and route each message a
             "description": "string",
             "state": "string",
             "personId": "string",
-            "spaceId": "string"
+            "spaceIds": ["string"]
           }
         ]
         ```  
@@ -208,7 +208,7 @@ This structure allows the Application Tier to interpret and route each message a
     - `maxAttendees` (integer): The maximum number of attendees allowed.  
     - `description` (string): A description of the reservation.  
     - `personId` (string): The unique ID of the person making the reservation.  
-    - `spaceId` (string): The unique ID of the space being reserved.  
+    - `spaceIds` ([string]): The unique ID of the space being reserved.  
   - Response:  
     - `200`: Reservation created successfully.  
       - Content-Type: `application/json`  
@@ -224,7 +224,7 @@ This structure allows the Application Tier to interpret and route each message a
             "description": "string",
             "state": "string",
             "personId": "string",
-            "spaceId": "string"
+            "spaceIds": ["string"]
           }
         ]
         ```  
@@ -251,7 +251,7 @@ This structure allows the Application Tier to interpret and route each message a
             "description": "string",
             "state": "string",
             "personId": "string",
-            "spaceId": "string"
+            "spaceIds": ["string"]
           }
         ]
         ```  
@@ -276,7 +276,7 @@ This structure allows the Application Tier to interpret and route each message a
             "description": "string",
             "state": "string",
             "personId": "string",
-            "spaceId": "string"
+            "spaceIds": ["string"]
           }
         ]
         ```  
