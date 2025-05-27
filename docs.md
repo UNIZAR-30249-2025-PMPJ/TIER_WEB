@@ -56,6 +56,7 @@ Messages contain two key identifiers:
 
 This structure allows the Application Tier to interpret and route each message appropriately.
 
+---
 
 ## Supported Operations
 
@@ -179,7 +180,6 @@ This structure allows the Application Tier to interpret and route each message a
     - `reservabilityCategory` (optional): Filter spaces by reservability category.
     - `floor` (optional): Filter spaces by floor.
   - Response:
-  - **Response**:  
     - `200`: A list of spaces matching the query parameters.  
       - Content-Type: `application/json`  
       - Schema:  
@@ -205,8 +205,8 @@ This structure allows the Application Tier to interpret and route each message a
           }
         ]
         ```  
-    - `400`: Invalid input.  
     - `404`: Space not found.
+    - `500`: Internal server error.
 
 - **`PUT`**:  
   Update the details of a specific space by its unique ID.  
@@ -417,5 +417,28 @@ This structure allows the Application Tier to interpret and route each message a
         ```  
     - `400`: Invalid input.  
     - `404`: Building not found.
+
+
+### Entity: Notification
+- **`GET`**:  
+  Retrieve all notifications by user ID.  
+  - Query:  
+    - `id` (optional): The unique ID of the user to retrieve notifications for.
+  - Response:  
+    - `200`: Notifications retrieved successfully.  
+      - Content-Type: `application/json`  
+      - Schema:  
+        ```json
+        [
+          {
+            "id": "string",
+            "message": "string",
+            "date": "string (date-time)",
+            "personId": "string"
+          }
+        ]
+        ```  
+    - `404`: Notifications not found.
+    - `500`: Internal server error.
 ---
 
