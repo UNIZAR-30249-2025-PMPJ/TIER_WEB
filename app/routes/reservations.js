@@ -86,9 +86,11 @@ const { authenticateJWT } = require('../middleware/auth');
  *                     items:
  *                       type: string
  *       400:
- *         description: Invalid input
+ *         description: Start time and duration must be provided together
  *       404:
- *         description: Reservation not found
+ *         description: Reservations not found
+ *       500:
+ *         description: Internal server error
  */
 router.get('/',authenticateJWT, (req, res) => reservationController.processRequest(req, res, ENTITY, "GET"));
 
@@ -153,8 +155,16 @@ router.get('/',authenticateJWT, (req, res) => reservationController.processReque
  *                     type: array
  *                     items:
  *                       type: string
+ *       400:
+ *         description: Invalid space IDs
+ *       409:
+ *         description: Reservation already exists for this time and space
+ *       403:
+ *         description: Forbidden.
  *       404:
- *         description: Space or person not found
+ *         description: Space, building or person not found
+ *       500:
+ *         description: Internal server error
  */
 router.post('/',authenticateJWT, (req, res) => reservationController.processRequest(req, res, ENTITY, "POST"));
 
@@ -216,6 +226,8 @@ router.post('/',authenticateJWT, (req, res) => reservationController.processRequ
  *                       type: string
  *       404:
  *         description: Reservation not found
+ *       500:
+ *         description: Internal server error
  */
 router.put("/:id",authenticateJWT, (req, res) => reservationController.processRequest(req, res, ENTITY, "PUT"));
 
@@ -267,6 +279,8 @@ router.put("/:id",authenticateJWT, (req, res) => reservationController.processRe
  *                       type: string
  *       404:
  *         description: Reservation not found
+ *       500:
+ *         description: Internal server error
  */
 router.delete("/:id",authenticateJWT, (req, res) => reservationController.processRequest(req, res, ENTITY, "DELETE"));
 

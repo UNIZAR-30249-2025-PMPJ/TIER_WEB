@@ -32,10 +32,10 @@ const ENTITY = "Auth";
  *                 token:
  *                   type: string
  *                   example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgzODM4MyIsIm5hbWUiOiJQcnVlYmEiLCJlbWFpbCI6IjgzODM4M0B1bml6YXIuZXMiLCJkZXBhcnRtZW50IjoidW5kZWZpbmVkIiwicm9sZSI6IkFsdW1ubyIsImlhdCI6MTc0MzAyMTQzOX0.OxfVbzZOw-2-FJECUoloY5EHH3QevlLJcaTa6ieprd0
- *       400:
- *         description: Bad request
- *       401:
- *         description: Unauthorized
+ *       404:
+ *        description: Person not found
+ *       500:
+ *        description: Internal server error
  */
 router.post('/', (req, res) => peopleController.processRequest(req, res, ENTITY, "LOGIN"));
 

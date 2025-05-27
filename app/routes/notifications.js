@@ -34,6 +34,8 @@ const ENTITY = "Notification";
  *                   type: string
  *       404:
  *         description: Person not found
+ *       500:
+ *        description: Internal server error
  */
 router.get('/:id',authenticateJWT, (req, res) => requestController.processRequest(req, res, ENTITY, "GETBYUSER"));
 

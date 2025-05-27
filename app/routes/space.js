@@ -81,10 +81,10 @@ const { authenticateJWT } = require('../middleware/auth');
  *                     type: string
  *                   assignedTo:
  *                     type: string
- *       400:
- *         description: Invalid input
  *       404:
  *         description: Space not found
+ *       500:
+ *        description: Internal server error
  */
 router.get('/',authenticateJWT, (req, res) => spaceController.processRequest(req, res, ENTITY, "GET"));
 
@@ -179,6 +179,8 @@ router.get('/',authenticateJWT, (req, res) => spaceController.processRequest(req
  *         description: Invalid input
  *       404:
  *         description: Space not found
+ *       500:
+ *         description: Internal server error
  */
 router.put("/:id",authenticateJWT, (req, res) => spaceController.processRequest(req, res, ENTITY, "PUT"));
 

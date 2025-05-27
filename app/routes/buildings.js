@@ -45,7 +45,9 @@ const { authenticateJWT } = require('../middleware/auth');
  *                       type: string
  *                       format: date-time
  *       404:
- *         description: Reservation not found
+ *         description: Building not found
+ *       500:   
+ *         description: Internal server error
  */
 router.get('/',authenticateJWT, (req, res) => buildingController.processRequest(req, res, ENTITY, "GET"));
 
@@ -108,10 +110,10 @@ router.get('/',authenticateJWT, (req, res) => buildingController.processRequest(
  *                   items:
  *                     type: string
  *                     format: date-time
- *       400:
- *         description: Invalid input
  *       404:
  *         description: Building not found
+ *       500:
+ *         description: Internal server error
  */
 router.put("/:id", (req, res) => buildingController.processRequest(req, res, ENTITY, "PUT"));
 

@@ -43,6 +43,8 @@ const ENTITY = "Person";
  *                       type: string
  *       404:
  *         description: Person not found
+ *       500:
+ *         description: Internal server error
  */
 router.get('/:id',authenticateJWT, (req, res) => peopleController.processRequest(req, res, ENTITY, "GETBYID"));
 
@@ -90,8 +92,10 @@ router.get('/:id',authenticateJWT, (req, res) => peopleController.processRequest
  *                   properties:
  *                     name:
  *                       type: string
- *       404:
- *         description: Person not created
+ *       409:
+ *         description: Person already exists with this ID
+ *       500:
+ *         description: Internal server error
  */
 router.post('/',authenticateJWT, (req, res) => peopleController.processRequest(req, res, ENTITY, "CREATE"));
 
@@ -144,8 +148,12 @@ router.post('/',authenticateJWT, (req, res) => peopleController.processRequest(r
  *                   properties:
  *                     name:
  *                       type: string
+ *       400:
+ *         description: Invalid role or department for the role
  *       404:
  *         description: Person not found
+ *       500:
+ *         description: Internal server error
  */
 router.put('/:id', authenticateJWT, (req, res) => peopleController.processRequest(req, res, ENTITY, "UPDATE"));
 
@@ -171,8 +179,28 @@ router.put('/:id', authenticateJWT, (req, res) => peopleController.processReques
  *     responses:
  *       200:
  *         description: Person deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *                 name:
+ *                   type: string
+ *                 email:
+ *                   type: string
+ *                 department:
+ *                   type: string
+ *                 role:
+ *                   type: object
+ *                   properties:
+ *                     name:
+ *                       type: string
  *       404:
  *         description: Person not found
+ *       500:
+ *         description: Internal server error
  */
 router.delete('/:id',authenticateJWT, (req, res) => peopleController.processRequest(req, res, ENTITY, "DELETE"));
 
