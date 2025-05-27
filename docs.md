@@ -31,7 +31,7 @@ This decouples the frontend from backend logic and ensures scalability and resil
 
 ## Message Structure
 
-      ```json
+```json
       {
         "entity": "string",
         "operation": "string",
@@ -46,7 +46,7 @@ This decouples the frontend from backend logic and ensures scalability and resil
         "params": {},
         "query": {}
       }
-      ```
+```
 
 Messages contain two key identifiers:
 
@@ -59,31 +59,116 @@ This structure allows the Application Tier to interpret and route each message a
 
 ## Supported Operations
 
+### Entity: Auth 
+- **`LOGIN`**:  
+  Authenticate a user and return an access token.  
+  - Request Body:  
+    - `email` (string): The email of the user.  
+  - Response:  
+    - `200`: Successful login, returns an access token:  
+      ```json
+        {
+          "token": "string"
+        }
+      ```  
+    - `404`: Person not found.
+    - `500`: Internal server error.
+
 ### Entity: Person
 - **`GETBYID`**:  
   Retrieve a person's details by their unique ID.  
   - Parameters:
     - `id` (required): The unique ID of the person to retrieve.  
   - Response:  
-    - `200`: A person object containing properties like `id`, `name`, `email`, `department`, and `role`.  
+    - `200`: The person object:
+      ```json
+        {
+          "id": "string",
+          "name": "string",
+          "email": "string",
+          "department": "string",
+          "role": {
+            "name": "string"
+          }
+        }
+      ``` 
     - `404`: Person not found.
+    - `500`: Internal server error.
 
 - **`CREATE`**:  
   Create a new person record in the system.  
   - Parameters:  
-    - `body` (required): The person object to create, including properties like `name`, `email`, `department`, and `role`.  
+    - `body` (required): The person object to create, including:
+      ```json
+        {
+          "name": "string",
+          "email": "string",
+          "department": "string",
+          "role": "string"
+        }
+      ```
   - Response:  
-    - `200`: The created person object with properties like `id`, `name`, `email`, `department`, and `role`.  
-    - `404`: Person not created.
+    - `200`: Person created, returns the created person object:
+      ```json
+        {
+          "id": "string",
+          "name": "string",
+          "email": "string",
+          "department": "string",
+          "role": {
+            "name": "string"
+          }
+        }
+      ```  
+    - `409`: Person already exists with this id.
+    - `500`: Internal server error.
 
 - **`DELETE`**:  
   Remove a person record from the system by their unique ID.  
   - Parameters:  
     - `id` (required): The unique ID of the person to delete.  
   - Response:  
-    - `200`: Confirmation that the person was deleted successfully.  
+    - `200`: Confirmation that the person was deleted successfully sending the user information:
+    ```json
+        {
+          "id": "string",
+          "name": "string",
+          "email": "string",
+          "department": "string",
+          "role": {
+            "name": "string"
+          }
+        }
+    ```
     - `404`: Person not found.
-
+    - `500`: Internal server error.
+- **`UPDATE`**:
+  Update a person's details by their unique ID.  
+  - Parameters:  
+    - `id` (required): The unique ID of the person to update.  
+    - `body` (required): The updated person attributes to change:
+    ```json
+        {
+          "department": "string",
+          "role": "string"
+        }
+    ```  
+  - Response:  
+    - `200`: The updated person object:
+      ```json
+        {
+          "id": "string",
+          "name": "string",
+          "email": "string",
+          "department": "string",
+          "role": {
+            "name": "string"
+          }
+        }
+      ```
+    - `400`: Invalid role or department for the role.
+    - `404`: Person not found.
+    - `500`: Internal server error.
 
 ### Entity: Space
 - **`GET`**:  
