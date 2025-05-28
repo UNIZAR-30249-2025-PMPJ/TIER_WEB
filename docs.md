@@ -60,351 +60,44 @@ This structure allows the Application Tier to interpret and route each message a
 
 ## Supported Operations
 
-### Entity: Auth 
-- **`LOGIN`**:  
-  Authenticate a user and return an access token.  
-  - Request Body:  
-    - `email` (string): The email of the user.  
-  - Response:  
-    - `200`: Successful login, returns an access token:  
-      ```json
-        {
-          "token": "string"
-        }
-      ```  
-    - `404`: Person not found.
-    - `500`: Internal server error.
+### Entity: Auth
 
-### Entity: Person
-- **`GETBYID`**:  
-  Retrieve a person's details by their unique ID.  
-  - Parameters:
-    - `id` (required): The unique ID of the person to retrieve.  
-  - Response:  
-    - `200`: The person object:
-      ```json
-        {
-          "id": "string",
-          "name": "string",
-          "email": "string",
-          "department": "string",
-          "role": {
-            "name": "string"
-          }
-        }
-      ``` 
-    - `404`: Person not found.
-    - `500`: Internal server error.
+* **`LOGIN`**
+  Authenticate a user and return an access token.
 
-- **`CREATE`**:  
-  Create a new person record in the system.  
-  - Parameters:  
-    - `body` (required): The person object to create, including:
-      ```json
-        {
-          "name": "string",
-          "email": "string",
-          "department": "string",
-          "role": "string"
-        }
-      ```
-  - Response:  
-    - `200`: Person created, returns the created person object:
-      ```json
-        {
-          "id": "string",
-          "name": "string",
-          "email": "string",
-          "department": "string",
-          "role": {
-            "name": "string"
-          }
-        }
-      ```  
-    - `409`: Person already exists with this id.
-    - `500`: Internal server error.
+  * **Request Body:**
 
-- **`DELETE`**:  
-  Remove a person record from the system by their unique ID.  
-  - Parameters:  
-    - `id` (required): The unique ID of the person to delete.  
-  - Response:  
-    - `200`: Confirmation that the person was deleted successfully sending the user information:
     ```json
-        {
-          "id": "string",
-          "name": "string",
-          "email": "string",
-          "department": "string",
-          "role": {
-            "name": "string"
-          }
-        }
+    {
+      "email": "string"
+    }
     ```
-    - `404`: Person not found.
-    - `500`: Internal server error.
-- **`UPDATE`**:
-  Update a person's details by their unique ID.  
-  - Parameters:  
-    - `id` (required): The unique ID of the person to update.  
-    - `body` (required): The updated person attributes to change:
-    ```json
-        {
-          "department": "string",
-          "role": "string"
-        }
-    ```  
-  - Response:  
-    - `200`: The updated person object:
+  * **Response:**
+
+    * `200`: Successful login, returns an access token.
+
       ```json
-        {
-          "id": "string",
-          "name": "string",
-          "email": "string",
-          "department": "string",
-          "role": {
-            "name": "string"
-          }
-        }
+      {
+        "token": "string"
+      }
       ```
-    - `400`: Invalid role or department for the role.
-    - `404`: Person not found.
-    - `500`: Internal server error.
-
-### Entity: Space
-- **`GET`**:  
-  Retrieve a list of spaces or a specific space by its unique ID.  
-  - Parameters:
-    - `id` (optional): The unique ID of the space to retrieve.
-    - `maxOccupants` (optional): Filter spaces by maximum occupants.
-    - `reservabilityCategory` (optional): Filter spaces by reservability category.
-    - `floor` (optional): Filter spaces by floor.
-  - Response:
-    - `200`: A list of spaces matching the query parameters.  
-      - Content-Type: `application/json`  
-      - Schema:  
-        ```json
-        [
-          {
-            "id": "string",
-            "name": "string",
-            "reservable": true,
-            "occupants": 0,
-            "maxOccupants": 0,
-            "maxUsage": 0,
-            "openTime": "string (date-time)",
-            "closeTime": "string (date-time)",
-            "building": "string",
-            "floor": "string",
-            "size": 0,
-            "reservabilityCategory": {
-              "name": "string"
-            },
-            "type": "string",
-            "assignedTo": "string"
-          }
-        ]
-        ```  
-    - `404`: Space not found.
-    - `500`: Internal server error.
-
-- **`PUT`**:  
-  Update the details of a specific space by its unique ID.  
-  - Parameters:
-    - `id` (required): The unique ID of the space to update.
-    - `body` (required): The updated space object, including properties like:
-      - `reservable` (boolean): Indicates if the space is reservable.
-      - `maxUsage` (integer): The maximum usage time for the space.
-      - `openTime` (string, date-time): The opening time of the space.
-      - `closeTime` (string, date-time): The closing time of the space.
-      - `reservabilityCategory` (object): The category of reservability, with a `name` property (string).
-      - `type` (string): The type of the space.
-      - `assignedTo` (string): The entity or person assigned to the space.
-  - Response:  
-    - `200`: Space updated successfully.  
-      - Content-Type: `application/json`  
-      - Schema:  
-        ```json
-        {
-          "message": "string",
-          "space": {
-            "id": "string",
-            "name": "string",
-            "reservable": true,
-            "occupants": 0,
-            "maxOccupants": 0,
-            "maxUsage": 0,
-            "openTime": "string (date-time)",
-            "closeTime": "string (date-time)",
-            "building": "string",
-            "floor": "string",
-            "size": 0,
-            "reservabilityCategory": {
-              "name": "string"
-            },
-            "type": "string",
-            "assignedTo": "string"
-          }
-        }
-        ```  
-    - `400`: Invalid input.  
-    - `404`: Space not found.
-
-### Entity: Reservation
-- **`GET`**:  
-  Retrieve a list of reservations or a specific reservation by its unique ID.  
-  - Query:
-    - `id` (optional): The unique ID of the reservation to retrieve.
-    - `spaceIds` (optional): IDs array of spaces to retrieve reservations for.
-    - `personId` (optional): The unique ID of the person to retrieve reservations for.
-    - `startTime` (optional): The start time from which to retrieve reservations. If provided, `duration` must also be provided.
-      - Format: `date-time`.
-    - `duration` (optional): The duration in minutes from the `startTime` to check for reservations. If provided, `startTime` must also be provided.
-    - `state` (optional): An array of states to filter reservations by (e.g., `ACTIVE`, `DONE`, `POTENTIALLY INVALID`).  
-      - Example: `["ACTIVE", "DONE"]`
-  - Response:  
-    - `200`: A list of reservations matching the query parameters.  
-      - Content-Type: `application/json`  
-      - Schema:  
-        ```json
-        [
-          {
-            "id": "string",
-            "usage": "string",
-            "startTime": "string (date-time)",
-            "duration": 0,
-            "maxAttendees": 0,
-            "description": "string",
-            "state": "string",
-            "personId": "string",
-            "spaceIds": ["string"]
-          }
-        ]
-        ```  
-    - `400`: Invalid input.  
-    - `404`: Reservation not found.
-
-- **`POST`**:  
-  Create a new reservation.  
-  - Request Body:  
-    - `usage` (string): The purpose of the reservation.  
-    - `startTime` (string, date-time): The start time of the reservation.  
-    - `duration` (integer): The duration of the reservation in minutes.  
-    - `maxAttendees` (integer): The maximum number of attendees allowed.  
-    - `description` (string): A description of the reservation.  
-    - `personId` (string): The unique ID of the person making the reservation.  
-    - `spaceIds` ([string]): The unique ID of the space being reserved.  
-  - Response:  
-    - `200`: Reservation created successfully.  
-      - Content-Type: `application/json`  
-      - Schema:  
-        ```json
-        [
-          {
-            "id": "string",
-            "usage": "string",
-            "startTime": "string (date-time)",
-            "duration": 0,
-            "maxAttendees": 0,
-            "description": "string",
-            "state": "string",
-            "personId": "string",
-            "spaceIds": ["string"]
-          }
-        ]
-        ```  
-    - `404`: Space or person not found.
-
-- **`PUT`**:  
-  Update a reservation by its unique ID.  
-  - Parameters:  
-    - `id` (required): The unique ID of the reservation to update.  
-  - Request Body:  
-    - `state` (string): The new state of the reservation.  
-  - Response:  
-    - `200`: Reservation updated successfully.  
-      - Content-Type: `application/json`  
-      - Schema:  
-        ```json
-        [
-          {
-            "id": "string",
-            "usage": "string",
-            "startTime": "string (date-time)",
-            "duration": 0,
-            "maxAttendees": 0,
-            "description": "string",
-            "state": "string",
-            "personId": "string",
-            "spaceIds": ["string"]
-          }
-        ]
-        ```  
-    - `404`: Reservation not found.
-  
-- **`DELETE`**:  
-  Delete a reservation by its unique ID.  
-  - Parameters:  
-    - `id` (required): The unique ID of the reservation to delete.  
-  - Response:  
-    - `200`: Reservation deleted successfully.  
-      - Content-Type: `application/json`  
-      - Schema:  
-        ```json
-        [
-          {
-            "id": "string",
-            "usage": "string",
-            "startTime": "string (date-time)",
-            "duration": 0,
-            "maxAttendees": 0,
-            "description": "string",
-            "state": "string",
-            "personId": "string",
-            "spaceIds": ["string"]
-          }
-        ]
-        ```  
-    - `404`: Reservation not found.
+    * `404`: Person not found.
+    * `500`: Internal server error.
 
 ### Entity: Building
 
-- **`GET`**:  
-  Retrieve a list of buildings or a specific building by its unique ID.  
-  - Query:  
-    - `id` (optional): The unique ID of the building to retrieve.  
-  - Response:  
-    - `200`: Buildings retrieved successfully.  
-      - Content-Type: `application/json`  
-      - Schema:  
-        ```json
-        [
-          {
-            "id": "string",
-            "openTime": "string (date-time)",
-            "closeTime": "string (date-time)",
-            "maxUsage": 0,
-            "holidays": [
-              "string (date-time)"
-            ]
-          }
-        ]
-        ```  
-    - `404`: Building not found.
-- **`PUT`**:  
-  Update a building's information by its unique ID.  
-  - Parameters:  
-    - `id` (required): The unique ID of the building to update.
-  - Request Body:  
-      - `openTime` (string, date-time): The opening time of the building.  
-      - `closeTime` (string, date-time): The closing time of the building.  
-      - `maxUsage` (integer): The maximum usage time for the building.  
-      - `holidays` (array of strings, date-time): A list of holidays when the building is closed.  
-  - Response:  
-    - `200`: Building updated successfully.  
-      - Content-Type: `application/json`  
-      - Schema:  
-        ```json
+* **`GET`**
+  Retrieve buildings or a specific building.
+
+  * **Query Parameters:**
+
+    * `id` (optional)
+  * **Response:**
+
+    * `200`: Buildings retrieved.
+
+      ```json
+      [
         {
           "id": "string",
           "openTime": "string (date-time)",
@@ -414,31 +107,407 @@ This structure allows the Application Tier to interpret and route each message a
             "string (date-time)"
           ]
         }
-        ```  
-    - `400`: Invalid input.  
-    - `404`: Building not found.
+      ]
+      ```
+    * `404`: Building not found.
+    * `500`: Internal server error.
+
+* **`PUT`**
+  Update a building by ID.
+
+  * **Parameters:**
+
+    * `id` (required)
+  * **Request Body:**
+
+    ```json
+    {
+      "openTime": "string (date-time)",
+      "closeTime": "string (date-time)",
+      "maxUsage": 0,
+      "holidays": ["string (date-time)"]
+    }
+    ```
+  * **Response:**
+
+    * `200`: Building updated.
+
+      ```json
+      {
+        "id": "string",
+        "openTime": "string (date-time)",
+        "closeTime": "string (date-time)",
+        "maxUsage": 0,
+        "holidays": [
+          "string (date-time)"
+        ]
+      }
+      ```
+    * `400`: Invalid input.
+    * `404`: Building not found.
+    * `500`: Internal server error.
+
 
 
 ### Entity: Notification
-- **`GET`**:  
-  Retrieve all notifications by user ID.  
-  - Query:  
-    - `id` (optional): The unique ID of the user to retrieve notifications for.
-  - Response:  
-    - `200`: Notifications retrieved successfully.  
-      - Content-Type: `application/json`  
-      - Schema:  
-        ```json
-        [
-          {
-            "id": "string",
-            "message": "string",
-            "date": "string (date-time)",
-            "personId": "string"
-          }
-        ]
-        ```  
-    - `404`: Notifications not found.
-    - `500`: Internal server error.
----
 
+* **`GET`**
+  Retrieve notifications for a user.
+
+  * **Query Parameters:**
+
+    * `id` (optional): User ID.
+  * **Response:**
+
+    * `200`: Notifications retrieved.
+
+      ```json
+      [
+        {
+          "id": "string",
+          "message": "string",
+          "date": "string (date-time)",
+          "personId": "string"
+        }
+      ]
+      ```
+    * `404`: Notifications not found.
+    * `500`: Internal server error.
+
+
+### Entity: Person
+
+* **`GETBYID`**
+  Retrieve a person's details by their unique ID.
+
+  * **Parameters:**
+
+    * `id` (required): Unique ID of the person.
+  * **Response:**
+
+    * `200`: Returns the person object.
+
+      ```json
+      {
+        "id": "string",
+        "name": "string",
+        "email": "string",
+        "department": "string",
+        "role": {
+          "name": "string"
+        }
+      }
+      ```
+    * `404`: Person not found.
+    * `500`: Internal server error.
+
+* **`UPDATE`**
+  Update a person's details by ID.
+
+  * **Parameters:**
+
+    * `id` (required): Unique ID of the person.
+  * **Request Body:**
+
+    ```json
+    {
+      "department": "string",
+      "role": "string"
+    }
+    ```
+  * **Response:**
+
+    * `200`: Person updated successfully.
+
+      ```json
+      {
+        "id": "string",
+        "name": "string",
+        "email": "string",
+        "department": "string",
+        "role": {
+          "name": "string"
+        }
+      }
+      ```
+    * `400`: Invalid role or department for the role.
+    * `404`: Person not found.
+    * `500`: Internal server error.
+    
+
+* **`DELETE`**
+  Remove a person by ID.
+
+  * **Parameters:**
+
+    * `id` (required): Unique ID of the person.
+  * **Response:**
+
+    * `200`: Person deleted successfully.
+
+      ```json
+      {
+        "id": "string",
+        "name": "string",
+        "email": "string",
+        "department": "string",
+        "role": {
+          "name": "string"
+        }
+      }
+      ```
+    * `404`: Person not found.
+    * `500`: Internal server error.
+
+
+* **`CREATE`**
+  Create a new person record.
+
+  * **Request Body:**
+
+    ```json
+    {
+      "name": "string",
+      "email": "string",
+      "department": "string",
+      "role": "string"
+    }
+    ```
+  * **Response:**
+
+    * `200`: Person created successfully.
+
+      ```json
+      {
+        "id": "string",
+        "name": "string",
+        "email": "string",
+        "department": "string",
+        "role": {
+          "name": "string"
+        }
+      }
+      ```
+    * `409`: Person already exists.
+    * `500`: Internal server error.
+
+
+### Entity: Reservation
+
+* **`GET`**
+  Retrieve reservations or a specific reservation.
+
+  * **Query Parameters:**
+
+    * `id` (optional)
+    * `spaceIds` (optional)
+    * `personId` (optional)
+    * `startTime`, `duration` (optional)
+    * `state` (optional)
+  * **Response:**
+
+    * `200`: Returns reservations.
+
+      ```json
+      [
+        {
+          "id": "string",
+          "usage": "string",
+          "startTime": "string (date-time)",
+          "duration": 0,
+          "maxAttendees": 0,
+          "description": "string",
+          "state": "string",
+          "personId": "string",
+          "spaceIds": ["string"]
+        }
+      ]
+      ```
+    * `400`: Invalid input.
+    * `404`: Reservation not found.
+    * `500`: Internal server error.
+
+* **`POST`**
+  Create a reservation.
+
+  * **Request Body:**
+
+    ```json
+    {
+      "usage": "string",
+      "startTime": "string (date-time)",
+      "duration": 0,
+      "maxAttendees": 0,
+      "description": "string",
+      "personId": "string",
+      "spaceIds": ["string"]
+    }
+    ```
+  * **Response:**
+
+    * `200`: Reservation created.
+    ```json
+    {
+      "usage": "string",
+      "startTime": "string (date-time)",
+      "duration": 0,
+      "maxAttendees": 0,
+      "description": "string",
+      "personId": "string",
+      "spaceIds": ["string"]
+    }
+    ```
+    * `404`: Space or person not found.
+    * `500`: Internal server error.
+
+* **`PUT`**
+  Update a reservation by ID.
+
+  * **Parameters:**
+
+    * `id` (required)
+  * **Request Body:**
+
+    ```json
+    {
+      "state": "string"
+    }
+    ```
+  * **Response:**
+
+    * `200`: Reservation updated.
+    ```json
+    {
+      "usage": "string",
+      "startTime": "string (date-time)",
+      "duration": 0,
+      "maxAttendees": 0,
+      "description": "string",
+      "personId": "string",
+      "spaceIds": ["string"]
+    }
+    ```
+    * `404`: Reservation not found.
+
+* **`DELETE`**
+  Delete a reservation by ID.
+
+  * **Parameters:**
+
+    * `id` (required)
+  * **Response:**
+
+    * `200`: Reservation deleted.
+    ```json
+    {
+      "usage": "string",
+      "startTime": "string (date-time)",
+      "duration": 0,
+      "maxAttendees": 0,
+      "description": "string",
+      "personId": "string",
+      "spaceIds": ["string"]
+    }
+    ```
+    * `404`: Reservation not found.
+    * `500`: Internal server error.
+
+
+
+
+### Entity: Space
+
+* **`GET`**
+  Retrieve spaces or a specific space.
+
+  * **Query Parameters:**
+
+    * `id` (optional)
+    * `maxOccupants` (optional)
+    * `reservabilityCategory` (optional)
+    * `floor` (optional)
+  * **Response:**
+
+    * `200`: Returns a list of spaces.
+
+      ```json
+      [
+        {
+          "id": "string",
+          "name": "string",
+          "reservable": true,
+          "occupants": 0,
+          "maxOccupants": 0,
+          "maxUsage": 0,
+          "openTime": "string (date-time)",
+          "closeTime": "string (date-time)",
+          "building": "string",
+          "floor": "string",
+          "size": 0,
+          "reservabilityCategory": {
+            "name": "string"
+          },
+          "type": "string",
+          "assignedTo": "string"
+        }
+      ]
+      ```
+    * `404`: Space not found.
+    * `500`: Internal server error.
+
+* **`PUT`**
+  Update a space by ID.
+
+  * **Parameters:**
+
+    * `id` (required)
+  * **Request Body:**
+
+    ```json
+    {
+      "reservable": true,
+      "maxUsage": 0,
+      "openTime": "string (date-time)",
+      "closeTime": "string (date-time)",
+      "reservabilityCategory": {
+        "name": "string"
+      },
+      "type": "string",
+      "assignedTo": "string"
+    }
+    ```
+  * **Response:**
+
+    * `200`: Space updated successfully.
+
+      ```json
+      {
+        "message": "string",
+        "space": {
+          "id": "string",
+          "name": "string",
+          "reservable": true,
+          "occupants": 0,
+          "maxOccupants": 0,
+          "maxUsage": 0,
+          "openTime": "string (date-time)",
+          "closeTime": "string (date-time)",
+          "building": "string",
+          "floor": "string",
+          "size": 0,
+          "reservabilityCategory": {
+            "name": "string"
+          },
+          "type": "string",
+          "assignedTo": "string"
+        }
+      }
+      ```
+    * `400`: Invalid input.
+    * `404`: Space not found.
+    * `500`: Internal server error.
+
+
+
+
+---
