@@ -38,6 +38,12 @@ const { authenticateJWT } = require('../middleware/auth');
  *         description: Floor of the space to retrieve
  *         schema:
  *           type: string
+ *       - in: query
+ *         name: reservable
+ *         required: false
+ *         description: Reservability of the space to retrieve
+ *         schema:
+ *           type: boolean
  *     responses:
  *       200:
  *         description: A list of spaces

@@ -426,6 +426,7 @@ This structure allows the Application Tier to interpret and route each message a
     * `maxOccupants` (optional)
     * `reservabilityCategory` (optional)
     * `floor` (optional)
+    * `reservable` (optional)
   * **Response:**
 
     * `200`: Returns a list of spaces.
