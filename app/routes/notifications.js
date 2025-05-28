@@ -10,7 +10,7 @@ const ENTITY = "Notification";
  * /api/notifications/{id}:
  *   get:
  *     tags:
- *      - Notifications
+ *      - Notification
  *     summary: Retrieve all notifications by user ID
  *     description: Use this endpoint to retrieve all notifications by user ID.
  *     parameters:
@@ -22,24 +22,26 @@ const ENTITY = "Notification";
  *           type: string
  *     responses:
  *       200:
- *         description: A notification object
+ *         description: A list of notification objects
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 id:
- *                   type: string
- *                 text:
- *                   type: string
- *                 date:    
- *                   type: string
- *                 personId:
- *                   type: string
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: string
+ *                   text:
+ *                     type: string
+ *                   date:
+ *                     type: string
+ *                   personId:
+ *                     type: string
  *       404:
  *         description: Notifications not found
  *       500:
- *        description: Internal server error
+ *         description: Internal server error
  */
 router.get('/:id',authenticateJWT, (req, res) => requestController.processRequest(req, res, ENTITY, "GETBYUSER"));
 
