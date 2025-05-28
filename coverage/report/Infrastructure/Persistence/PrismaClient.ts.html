@@ -563,18 +563,7 @@
 <a name='L498'></a><a href='#L498'>498</a>
 <a name='L499'></a><a href='#L499'>499</a>
 <a name='L500'></a><a href='#L500'>500</a>
-<a name='L501'></a><a href='#L501'>501</a>
-<a name='L502'></a><a href='#L502'>502</a>
-<a name='L503'></a><a href='#L503'>503</a>
-<a name='L504'></a><a href='#L504'>504</a>
-<a name='L505'></a><a href='#L505'>505</a>
-<a name='L506'></a><a href='#L506'>506</a>
-<a name='L507'></a><a href='#L507'>507</a>
-<a name='L508'></a><a href='#L508'>508</a>
-<a name='L509'></a><a href='#L509'>509</a>
-<a name='L510'></a><a href='#L510'>510</a>
-<a name='L511'></a><a href='#L511'>511</a>
-<a name='L512'></a><a href='#L512'>512</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L501'></a><a href='#L501'>501</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
@@ -582,7 +571,6 @@
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -605,7 +593,6 @@
 <span class="cline-any cline-yes">92x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">92x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -644,7 +631,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -655,10 +641,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
@@ -688,9 +672,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -803,7 +784,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -811,7 +791,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -898,8 +877,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1110,9 +1088,8 @@ export const prisma = new PrismaClient(
                 assignedTo: string | undefined;
                 assignedToPersonId: string | undefined;
                 assignedToBuildingId: string | undefined;
-                geometry: string; // Supongo que geometry es una cadena JSON (GeoJSON)
+                geometry: string; 
             }) {
-                // Convertimos la geometría de un string a un objeto JSON
                 const geometry = JSON.parse(data.geometry);
 &nbsp;
                 const space = {
@@ -1131,7 +1108,6 @@ export const prisma = new PrismaClient(
                     geometry: geometry
                 };
 &nbsp;
-                // Inserción en la base de datos
                 await prisma.$executeRaw`
                     INSERT INTO "Space" ("id", "name", "reservable", "maxOccupants", "buildingId", "floor", "size", "reservabilityCategory", "type", "assignedTo", "assignedToPersonId", "assignedToBuildingId", "geometry") 
                     VALUES (
@@ -1154,7 +1130,6 @@ export const prisma = new PrismaClient(
                 return space;
             },
             async update(args: Prisma.SpaceUpdateArgs) {
-                // Convertimos la geometría de un string a un objeto JSON si está presente
 &nbsp;
                 const whereClause = args.where &amp;&amp; Object.keys(args.where).length &gt; 0
                     ? Prisma.join(
@@ -1166,14 +1141,12 @@ export const prisma = new PrismaClient(
                     : <span class="branch-1 cbranch-no" title="branch not covered" >Prisma.sql`TRUE`;</span>
 &nbsp;
 &nbsp;
-                // Filtramos las claves undefined
                 const filteredUpdateData = Object.fromEntries(
                     Object.entries(args.data).filter(([_, value]) =&gt; value !== undefined)
                 );
 &nbsp;
-                // Actualizamos en la base de datos
                 let result = await prisma.$queryRaw&lt;{
-                    geometry: string; // Aquí se devuelve como un string GeoJSON
+                    geometry: string; 
                     maxOccupants: number;
                     id: string;
                     name: string;
@@ -1226,9 +1199,6 @@ export const prisma = new PrismaClient(
                         (SELECT "department" FROM "Person" WHERE "Person"."id" = "Space"."assignedToPersonId") as "assignedToPerson_department",
                         ST_AsGeoJSON("geometry") as geometry;
                 `;
-                // Sí, el operador `??` evalúa de izquierda a derecha y retorna el primer valor que no sea null ni undefined.
-                // Por ejemplo, si result[0].assignedTo es null, intenta con result[0].assignedToBuildingId, y así sucesivamente.
-                // Si todos son null o undefined, retorna "Unassigned".
 &nbsp;
                 const res = new Space(
                     result[0].id,
@@ -1250,12 +1220,12 @@ export const prisma = new PrismaClient(
                         new Role(result[0].assignedToPerson_role as ROLE),
                         result[0].assignedToPerson_department
                     ) : "Unassigned"),
-                    JSON.parse(result[0].geometry) // Convertimos el GeoJSON string a objeto
+                    JSON.parse(result[0].geometry) 
                 );
                 return res;
             }
             ,
-            async findMany(args: Prisma.SpaceFindManyArgs) {
+            async findManyWhere(args: Prisma.SpaceFindManyArgs) {
                 const { maxOccupants, reservable, ...otherWhere } = args.where || <span class="branch-1 cbranch-no" title="branch not covered" >{};</span>
                 const whereClause = otherWhere &amp;&amp; Object.keys(otherWhere).length &gt; 0
                     ? Prisma.join(
@@ -1272,7 +1242,7 @@ export const prisma = new PrismaClient(
                     : Prisma.sql`TRUE`;
                 let result = await prisma.$queryRaw&lt;
                     {
-                        geometry: string; // Aquí se devuelve como un string GeoJSON
+                        geometry: string; 
                         maxOccupants: number;
                         id: string;
                         name: string;
@@ -1314,7 +1284,6 @@ export const prisma = new PrismaClient(
                     AND ${args.where &amp;&amp; otherWhere ? Prisma.sql`${whereClause}` : <span class="branch-1 cbranch-no" title="branch not covered" >Prisma.sql`TRUE`}</span>;
                 `;
                 let p = undefined
-                // Si assignedToPersonId no es null, buscamos el Person correspondiente
                 for (const space of result) {
                     <span class="missing-if-branch" title="if path not taken" >I</span>if (space.assignedToPersonId) {
                         const person = <span class="cstat-no" title="statement not covered" >await prisma.person.findUnique({ where: { id: space.assignedToPersonId } });</span>
@@ -1332,7 +1301,6 @@ export const prisma = new PrismaClient(
                         }
                     }
                 }
-                // Procesamos el resultado y parseamos la geometría como un objeto JSON
                 return result.map((space) =&gt; {
                     return new Space(
                         space.id,
@@ -1354,7 +1322,7 @@ export const prisma = new PrismaClient(
             }
         },
         reservation: {
-            async findMany(args: Prisma.ReservationFindManyArgs) {
+            async findManyWhere(args: Prisma.ReservationFindManyArgs) {
                 const { id, personId, spaces, startTime, duration, ...otherWhere } = args.where || <span class="branch-1 cbranch-no" title="branch not covered" >{};</span>
                 const whereClause = otherWhere &amp;&amp; Object.keys(otherWhere).length &gt; 0
                     ? <span class="branch-0 cbranch-no" title="branch not covered" >Prisma.join(</span>
@@ -1426,7 +1394,6 @@ export const prisma = new PrismaClient(
             async <span class="fstat-no" title="function not covered" >updateMany(</span>args: Prisma.
                 ReservationUpdateManyArgs) {
                 
-                // Filtramos las claves undefined
                 const filteredUpdateData = <span class="cstat-no" title="statement not covered" >Object.fromEntries(</span>
                     Object.entries(args.data).filter(<span class="fstat-no" title="function not covered" >([</span>_, value]) =&gt; <span class="cstat-no" title="statement not covered" >value !== undefined)</span>
                 );
@@ -1603,7 +1570,7 @@ export const prisma = new PrismaClient(
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-28T09:28:02.933Z
+                at 2025-05-28T20:19:22.078Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

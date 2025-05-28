@@ -112,9 +112,36 @@
 <a name='L47'></a><a href='#L47'>47</a>
 <a name='L48'></a><a href='#L48'>48</a>
 <a name='L49'></a><a href='#L49'>49</a>
-<a name='L50'></a><a href='#L50'>50</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -144,7 +171,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -153,12 +180,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import INotificationRepository from "@/Domain/Repositories/INotificationRepository";
@@ -166,10 +204,18 @@ import Notification from "@/Domain/Entities/Notification";
 import { prisma } from "../PrismaClient";
 import { Prisma } from "@prisma/client";
 &nbsp;
+/**
+ * SQL implementation of the notification repository.
+ */
 class SQLNotificationRepository implements INotificationRepository {
+    /**
+     * Saves a new notification.
+     * @param notification - The notification entity to save.
+     * @returns A promise resolving to the saved Notification.
+     */
     async save(notification: Notification): Promise&lt;Notification&gt; {
         let notificationObject: { personId: string, message: string, date: Date } = notification.toObject();
-        
+&nbsp;
         // Ensure the person exists before creating the notification
         const personExists = await prisma.person.findUnique({
             where: { id: notificationObject.personId },
@@ -191,17 +237,27 @@ class SQLNotificationRepository implements INotificationRepository {
         });
         return new Notification(savedNotification.id, savedNotification.message, savedNotification.personId, savedNotification.date);
     }
+&nbsp;
+    /**
+     * Finds notifications by person ID.
+     * @param personId - The ID of the person.
+     * @returns A promise resolving to an array of Notification entities.
+     */
     async findByPerson(personId: string): Promise&lt;Notification[]&gt; {
-        // Implement the logic to find notifications by person ID
         const notifications = await prisma.notification.findMany({
             where: {
                 personId: personId,
             },
         });
-        return notifications.map((notification) =&gt; new Notification(notification.id,  notification.message, notification.personId, notification.date));
+        return notifications.map((notification) =&gt; new Notification(notification.id, notification.message, notification.personId, notification.date));
     }
+&nbsp;
+    /**
+     * Deletes a notification by its ID.
+     * @param id - The ID of the notification to delete.
+     * @returns A promise resolving to the deleted Notification entity.
+     */
     async deleteById(id: string): Promise&lt;Notification&gt; {
-        // Implement the logic to delete a notification by ID
         const deletedNotification = await prisma.notification.delete({
             where: {
                 id: id,
@@ -210,6 +266,7 @@ class SQLNotificationRepository implements INotificationRepository {
         return new Notification(deletedNotification.id, deletedNotification.message, deletedNotification.personId, deletedNotification.date);
     }
 }
+&nbsp;
 export default SQLNotificationRepository;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -217,7 +274,7 @@ export default SQLNotificationRepository;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-28T09:28:02.933Z
+                at 2025-05-28T20:19:22.078Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
