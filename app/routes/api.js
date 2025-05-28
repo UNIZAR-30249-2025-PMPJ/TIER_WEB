@@ -8,6 +8,8 @@ const spaceRouter = require('./space');
 const reservationsRouter = require('./reservations');
 const notificationRouter = require('./notifications');
 const buildingRouter = require('./buildings');
+const coverageRouter = require('./tests-coverage');
+const path = require('path');
 
 
 router.use('/', indexRouter);
@@ -17,6 +19,8 @@ router.use('/spaces', spaceRouter);
 router.use('/reservations', reservationsRouter);
 router.use('/notifications', notificationRouter);
 router.use('/buildings', buildingRouter);
+router.use('/tests-coverage', express.static(path.join(__dirname, '../coverage/lcov-report')));
+
 
 
 
