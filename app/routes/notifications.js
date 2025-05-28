@@ -32,8 +32,12 @@ const ENTITY = "Notification";
  *                   type: string
  *                 text:
  *                   type: string
+ *                 date:    
+ *                   type: string
+ *                 personId:
+ *                   type: string
  *       404:
- *         description: Person not found
+ *         description: Notifications not found
  *       500:
  *        description: Internal server error
  */
